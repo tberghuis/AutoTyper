@@ -5,7 +5,7 @@ import android.bluetooth.BluetoothDevice
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import dev.tberghuis.btmacrokb.logd
+import dev.tberghuis.btmacrokb.util.logd
 import dev.tberghuis.btmacrokb.service.provideMyBtService
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest

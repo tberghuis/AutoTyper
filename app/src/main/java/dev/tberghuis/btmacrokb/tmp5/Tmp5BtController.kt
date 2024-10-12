@@ -9,9 +9,8 @@ import android.bluetooth.BluetoothHidDeviceAppSdpSettings
 import android.bluetooth.BluetoothManager
 import android.bluetooth.BluetoothProfile
 import android.content.Context
-import dev.tberghuis.btmacrokb.asciiCharToReportByteArray
 import dev.tberghuis.btmacrokb.kbDescriptor
-import dev.tberghuis.btmacrokb.logd
+import dev.tberghuis.btmacrokb.util.logd
 
 class Tmp5BtController(val application: Application) {
   var btAdapter: BluetoothAdapter? = null

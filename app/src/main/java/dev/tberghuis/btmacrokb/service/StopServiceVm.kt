@@ -4,7 +4,7 @@ import android.app.Application
 import android.content.Intent
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.SavedStateHandle
-import dev.tberghuis.btmacrokb.logd
+import dev.tberghuis.btmacrokb.util.logd
 
 class StopServiceVm(
   private val application: Application, private val state: SavedStateHandle

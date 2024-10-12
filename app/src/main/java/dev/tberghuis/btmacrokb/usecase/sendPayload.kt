@@ -2,7 +2,7 @@ package dev.tberghuis.btmacrokb.usecase
 
 import android.app.Application
 import androidx.compose.material3.SnackbarHostState
-import dev.tberghuis.btmacrokb.logd
+import dev.tberghuis.btmacrokb.util.logd
 import dev.tberghuis.btmacrokb.service.provideMyBtService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch

@@ -12,7 +12,7 @@ import android.util.Log
 import dev.tberghuis.btmacrokb.KEYBOARD_ID
 import dev.tberghuis.btmacrokb.asciiCharToReportByteArray
 import dev.tberghuis.btmacrokb.kbDescriptor
-import dev.tberghuis.btmacrokb.logd
+import dev.tberghuis.btmacrokb.util.logd
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.filter

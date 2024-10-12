@@ -13,7 +13,7 @@ import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.currentBackStackEntryAsState
 import dev.tberghuis.btmacrokb.nav.Route
 import androidx.navigation.NavDestination.Companion.hasRoute
-import dev.tberghuis.btmacrokb.logd
+import dev.tberghuis.btmacrokb.util.logd
 
 @Composable
 fun BottomBar() {

@@ -11,7 +11,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
 import dev.tberghuis.btmacrokb.data.Macro
 import dev.tberghuis.btmacrokb.data.appDatabase
-import dev.tberghuis.btmacrokb.logd
+import dev.tberghuis.btmacrokb.util.logd
 import dev.tberghuis.btmacrokb.nav.Route
 import dev.tberghuis.btmacrokb.usecase.sendPayload
 import kotlinx.coroutines.launch
