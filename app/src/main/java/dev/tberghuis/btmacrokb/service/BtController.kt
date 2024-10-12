@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothHidDevice
-import android.bluetooth.BluetoothHidDeviceAppQosSettings
 import android.bluetooth.BluetoothHidDeviceAppSdpSettings
 import android.bluetooth.BluetoothManager
 import android.bluetooth.BluetoothProfile
@@ -152,6 +151,8 @@ class BtController(service: MyBtService) {
     if (connectedDevices.value.isEmpty()) {
       return false
     }
+    // UI restricts user to only connect to one device at a time
+    // I think HID profile restricts to only one connected device as well
     connectedDevices.value.forEach {
       // launch in IO dispatcher
       scope.launch {
@@ -173,6 +174,8 @@ class BtController(service: MyBtService) {
         KEYBOARD_ID,
         asciiCharToReportByteArray[char] ?: return@forEach
       )
+      // delay period came from trial and error
+      // to prevent skipped and ghost key presses
       delay(5)
       hid.sendReport(device, KEYBOARD_ID, ByteArray(8) { 0 })
 //      delay(1)

@@ -2,10 +2,9 @@ package dev.tberghuis.btmacrokb
 
 import dev.tberghuis.btmacrokb.util.byteArrayOfInts
 
-// is there a way to run `byteArrayOfInts()` at compile time??? ksp
-
 const val KEYBOARD_ID = 8
 
+// is there a way to run `byteArrayOfInts()` at compile time??? ksp
 val asciiCharToReportByteArray = mapOf(
   'a' to byteArrayOfInts(0x0, 0x0, 0x4, 0x0, 0x0, 0x0, 0x0, 0x0),
   'b' to byteArrayOfInts(0x0, 0x0, 0x5, 0x0, 0x0, 0x0, 0x0, 0x0),

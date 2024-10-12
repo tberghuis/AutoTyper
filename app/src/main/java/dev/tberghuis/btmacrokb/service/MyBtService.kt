@@ -65,12 +65,12 @@ class MyBtService : Service() {
     // Q = 29
     if (Build.VERSION.SDK_INT >= 29) {
       startForeground(
-        100,
+        FOREGROUND_SERVICE_NOTIFICATION_ID,
         notification,
         ServiceInfo.FOREGROUND_SERVICE_TYPE_CONNECTED_DEVICE,
       )
     } else {
-      startForeground(100, notification)
+      startForeground(FOREGROUND_SERVICE_NOTIFICATION_ID, notification)
     }
   }
 
@@ -86,5 +86,6 @@ class MyBtService : Service() {
 
   companion object {
     private const val NOTIFICATION_CHANNEL = "bt_connect_channel"
+    const val FOREGROUND_SERVICE_NOTIFICATION_ID = 100
   }
 }
