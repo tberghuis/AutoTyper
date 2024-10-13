@@ -4,4 +4,4 @@
 
 ## Screenshots
 
-<img alt='Screenshot' src='https://tberghuis.dev/AutoTyper/screenshots/Screenshot_20241012_133808.png' width="350"/> <img alt='Screenshot' src='https://tberghuis.dev/AutoTyper/screenshots/Screenshot_20241012_134646.png' width="350"/> <img alt='Screenshot' src='https://tberghuis.dev/AutoTyper/screenshots/Screenshot_20241012_134740.png' width="350"/> 
+<img alt='Screenshot' src='https://tberghuis.dev/AutoTyper/screenshots/Screenshot_20241012_133808.png' width="350"/> <img alt='Screenshot' src='https://tberghuis.dev/AutoTyper/screenshots/Screenshot_20241012_134740.png' width="350"/> <img alt='Screenshot' src='https://tberghuis.dev/AutoTyper/screenshots/Screenshot_20241012_134646.png' width="350"/> 
