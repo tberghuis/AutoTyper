@@ -131,7 +131,7 @@ fun PairedDeviceCard(
     ) {
       Box(Modifier.size(40.dp), contentAlignment = Alignment.Center) {
         Icon(
-          when (device.bluetoothClass.majorDeviceClass) {
+          when (device.bluetoothClass?.majorDeviceClass) {
             BluetoothClass.Device.Major.PHONE -> Icons.Default.Smartphone
             BluetoothClass.Device.Major.AUDIO_VIDEO -> Icons.Default.Headphones
             BluetoothClass.Device.Major.COMPUTER -> Icons.Default.Computer
@@ -142,8 +142,8 @@ fun PairedDeviceCard(
         )
       }
       Column {
-        Text(device.name)
-        Text(device.address)
+        Text(device.name ?: "null")
+        Text(device.address ?: "null")
       }
       if (vm.connectedDevices.value.isEmpty()) {
         Button(onClick = {

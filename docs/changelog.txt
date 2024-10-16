@@ -1,0 +1,4 @@
+
+1.1 2024-10-17
+  fix NPE ConnectionScreen.kt majorDeviceClass
+  
