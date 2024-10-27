@@ -54,36 +54,39 @@ kotlin {
 }
 
 dependencies {
+  implementation(platform(libs.androidx.compose.bom))
   implementation(libs.androidx.core.ktx)
   implementation(libs.androidx.lifecycle.runtime.ktx)
   implementation(libs.androidx.activity.compose)
-  implementation(platform(libs.androidx.compose.bom))
   implementation(libs.androidx.ui)
   implementation(libs.androidx.ui.graphics)
   implementation(libs.androidx.ui.tooling.preview)
   implementation(libs.androidx.material3)
   implementation(libs.androidx.navigation.compose)
-  testImplementation(libs.junit)
-  androidTestImplementation(libs.androidx.junit)
-  androidTestImplementation(libs.androidx.espresso.core)
-  androidTestImplementation(platform(libs.androidx.compose.bom))
-  androidTestImplementation(libs.androidx.ui.test.junit4)
-  debugImplementation(libs.androidx.ui.tooling)
-  debugImplementation(libs.androidx.ui.test.manifest)
-
   implementation(libs.accompanist.permissions)
   implementation(libs.androidx.lifecycle.viewModelCompose)
-
   implementation(libs.room.runtime)
   implementation(libs.room.ktx)
-  ksp(libs.room.compiler)
-
   // find icon name https://fonts.google.com/icons
   implementation(libs.androidx.compose.material.iconsExtended)
-
   // need for @Serializable to compile when ktor not included
   // https://stackoverflow.com/questions/74366590/intellij-ktor-kotlinx-serialization-cannot-access-serializable-it-is-inter
   implementation(libs.kotlinx.serialization.json)
+  implementation(libs.androidx.glance.appwidget)
+  implementation(libs.androidx.glance.material3)
+
+  testImplementation(libs.junit)
+
+  androidTestImplementation(platform(libs.androidx.compose.bom))
+  androidTestImplementation(libs.androidx.junit)
+  androidTestImplementation(libs.androidx.espresso.core)
+  androidTestImplementation(libs.androidx.ui.test.junit4)
+
+  debugImplementation(libs.androidx.ui.tooling)
+  debugImplementation(libs.androidx.ui.test.manifest)
+
+  ksp(libs.room.compiler)
+
 
   // for dev only
 //  val ktorVersion = "2.3.12"
