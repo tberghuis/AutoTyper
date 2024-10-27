@@ -1,6 +1,7 @@
 package dev.tberghuis.btmacrokb.tmp6
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
@@ -14,6 +15,11 @@ fun TmpClipboardScreen(
   Column {
     Text("hello clipboard screen")
     Text(vm.willitblend)
+    Button(onClick = {
+      vm.readClipboard()
+    }) {
+      Text("read clipboard")
+    }
   }
 }
 
