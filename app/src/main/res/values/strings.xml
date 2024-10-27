@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Auto Typer</string>
+    <string name="app_widget_description">app widget description</string>
 </resources>
