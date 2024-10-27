@@ -2,9 +2,16 @@ package dev.tberghuis.btmacrokb.tmp6
 
 import android.content.Context
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.unit.dp
 import androidx.glance.GlanceId
+import androidx.glance.GlanceModifier
+import androidx.glance.GlanceTheme
 import androidx.glance.appwidget.GlanceAppWidget
+import androidx.glance.appwidget.cornerRadius
 import androidx.glance.appwidget.provideContent
+import androidx.glance.background
+import androidx.glance.layout.Column
+import androidx.glance.layout.padding
 import androidx.glance.text.Text
 
 class MyAppWidget : GlanceAppWidget() {
@@ -16,15 +23,23 @@ class MyAppWidget : GlanceAppWidget() {
     // operations.
 
     provideContent {
-      // create your AppWidget here
-      Text("Hello World")
+      MyContent()
     }
   }
 
 
   @Composable
   private fun MyContent() {
-
+    GlanceTheme {
+      Column(
+        modifier = GlanceModifier
+          .background(GlanceTheme.colors.surface)
+          .cornerRadius(24.dp)
+          .padding(10.dp)
+      ) {
+        Text("Hello World")
+      }
+    }
   }
 
 
