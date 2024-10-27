@@ -85,8 +85,8 @@ fun PairedDeviceList(
       .consumeWindowInsets(padding)
       .padding(padding)
       .imePadding()
-      .padding(horizontal = 10.dp)
       .fillMaxSize(),
+    contentPadding = PaddingValues(10.dp),
     verticalArrangement = Arrangement.spacedBy(15.dp),
     horizontalAlignment = Alignment.CenterHorizontally,
   ) {
