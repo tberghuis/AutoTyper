@@ -1,9 +1,11 @@
 package dev.tberghuis.btmacrokb.screens
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.bluetooth.BluetoothClass
 import android.bluetooth.BluetoothDevice
 import android.content.Intent
+import android.os.Build
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -35,6 +37,7 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -43,16 +46,34 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LifecycleEventEffect
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.isGranted
+import com.google.accompanist.permissions.rememberPermissionState
 import dev.tberghuis.btmacrokb.composables.BottomBar
 import dev.tberghuis.btmacrokb.nav.LocalSnackbarHostState
+import dev.tberghuis.btmacrokb.util.logd
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalPermissionsApi::class)
 @Composable
 fun ConnectionScreen(
   vm: ConnectionVm = viewModel()
 ) {
   LifecycleEventEffect(Lifecycle.Event.ON_RESUME) {
     vm.getPairedDevices()
+  }
+
+  val notificationPermissionState = if (Build.VERSION.SDK_INT >= 33) {
+    rememberPermissionState(
+      Manifest.permission.POST_NOTIFICATIONS
+    )
+  } else {
+    null
+  }
+  if (notificationPermissionState?.status?.isGranted == false) {
+    LaunchedEffect(Unit) {
+      logd("not granted")
+      notificationPermissionState.launchPermissionRequest()
+    }
   }
 
   Scaffold(
