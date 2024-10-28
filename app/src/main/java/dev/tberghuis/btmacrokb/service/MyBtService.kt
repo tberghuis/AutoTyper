@@ -1,6 +1,8 @@
 package dev.tberghuis.btmacrokb.service
 
 import android.annotation.SuppressLint
+import android.app.Notification
+import android.app.PendingIntent
 import android.app.Service
 import android.content.Intent
 import android.content.pm.ServiceInfo
@@ -10,6 +12,7 @@ import android.os.IBinder
 import androidx.core.app.NotificationChannelCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import dev.tberghuis.btmacrokb.MainActivity
 import dev.tberghuis.btmacrokb.util.logd
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -56,12 +59,7 @@ class MyBtService : Service() {
   @SuppressLint("ObsoleteSdkInt")
   private fun startInForeground() {
     createNotificationChannel()
-
-    val notification = NotificationCompat.Builder(this, NOTIFICATION_CHANNEL)
-      .setSmallIcon(applicationInfo.icon)
-      .setContentTitle("bt connect")
-      .setContentText("Running...")
-      .build()
+    val notification = createNotification()
     // Q = 29
     if (Build.VERSION.SDK_INT >= 29) {
       startForeground(
@@ -72,6 +70,22 @@ class MyBtService : Service() {
     } else {
       startForeground(FOREGROUND_SERVICE_NOTIFICATION_ID, notification)
     }
+  }
+
+  private fun createNotification(): Notification {
+    val intent = Intent(this, MainActivity::class.java).apply {
+      flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+    }
+    val pendingIntent: PendingIntent =
+      PendingIntent.getActivity(this, REQUEST_CODE_OPEN_APP, intent, PendingIntent.FLAG_IMMUTABLE)
+
+    val notification = NotificationCompat.Builder(this, NOTIFICATION_CHANNEL)
+      .setSmallIcon(applicationInfo.icon)
+      .setContentTitle("Auto Typer")
+      .setContentText("Foreground service is running...")
+      .setContentIntent(pendingIntent)
+      .build()
+    return notification
   }
 
   private fun createNotificationChannel() {
@@ -87,5 +101,6 @@ class MyBtService : Service() {
   companion object {
     private const val NOTIFICATION_CHANNEL = "bt_connect_channel"
     const val FOREGROUND_SERVICE_NOTIFICATION_ID = 100
+    const val REQUEST_CODE_OPEN_APP = 1
   }
 }
