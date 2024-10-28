@@ -74,6 +74,7 @@ class MyBtService : Service() {
 
   private fun createNotification(): Notification {
     val intent = Intent(this, MainActivity::class.java).apply {
+      // are these the correct flags?
       flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
     }
     val pendingIntent: PendingIntent =
