@@ -79,6 +79,8 @@ fun ConnectionScreen(
     }
   }
 
+  val snackbarHostState = LocalSnackbarHostState.current
+
   Scaffold(
     modifier = Modifier.systemBarsPadding(),
     topBar = {
@@ -91,11 +93,12 @@ fun ConnectionScreen(
       BottomBar()
     },
     snackbarHost = {
-      SnackbarHost(hostState = LocalSnackbarHostState.current)
+      SnackbarHost(hostState = snackbarHostState)
     },
     floatingActionButton = {
       FloatingActionButton(
         onClick = {
+          vm.typeClipboard(snackbarHostState)
         },
       ) {
         Icon(Icons.Filled.ContentPaste, contentDescription = "paste")
