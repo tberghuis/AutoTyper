@@ -46,24 +46,14 @@ fun PermissionScreen() {
   val nav = LocalNavController.current
   val context = LocalContext.current
 
-  LaunchedEffect(btPermissionState) {
-    snapshotFlow { btPermissionState.status }
-      .collect {
-        if (it == PermissionStatus.Granted) {
-          logd("bt permission granted")
-          (context as MainActivity).hasBluetoothConnectionPermissions = true
-          nav.navigate(
-            Route.Connection,
-            NavOptions.Builder().setPopUpTo(Route.Permission, true).build()
-          )
-        } else {
-          logd("bt permission not granted")
-          (context as MainActivity).hasBluetoothConnectionPermissions = false
-        }
-      }
-  }
-
   if (btPermissionState.status == PermissionStatus.Granted) {
+    LaunchedEffect(Unit) {
+      logd("bt permission granted")
+      nav.navigate(
+        Route.Connection,
+        NavOptions.Builder().setPopUpTo(Route.Permission, true).build()
+      )
+    }
     return
   }
 

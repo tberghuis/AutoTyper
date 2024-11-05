@@ -8,6 +8,7 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import dev.tberghuis.btmacrokb.MyApplication
 import dev.tberghuis.btmacrokb.util.logd
 import dev.tberghuis.btmacrokb.service.provideMyBtService
 import dev.tberghuis.btmacrokb.usecase.sendPayload
@@ -31,6 +32,8 @@ class ConnectionVm(
       application.provideMyBtService().myBtController.connectedDevices.collectLatest {
         logd("observeBtController connectedDevice.collectLatest $it")
         connectedDevices.value = it
+        // this is wack
+        (application as MyApplication).isBtConnected = it.isNotEmpty()
       }
     }
   }

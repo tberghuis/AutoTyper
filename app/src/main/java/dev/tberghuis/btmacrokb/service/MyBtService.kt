@@ -56,14 +56,14 @@ class MyBtService : Service() {
 
   override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
     logd("onStartCommand action ${intent?.action}")
-    when (intent?.action) {
-      ACTION_ACTIVITY_DESTROY -> {
-        logd("onStartCommand ACTION_ACTIVITY_DESTROY")
-        if (myBtController.connectedDevices.value.isEmpty()) {
-          stopSelf()
-        }
-      }
-    }
+//    when (intent?.action) {
+//      ACTION_ACTIVITY_DESTROY -> {
+//        logd("onStartCommand ACTION_ACTIVITY_DESTROY")
+//        if (myBtController.connectedDevices.value.isEmpty()) {
+//          stopSelf()
+//        }
+//      }
+//    }
 
     // fix crash play console ForegroundServiceStartNotAllowedException
     // https://issuetracker.google.com/issues/307329994?pli=1
@@ -117,6 +117,6 @@ class MyBtService : Service() {
     private const val NOTIFICATION_CHANNEL = "bt_connect_channel"
     const val FOREGROUND_SERVICE_NOTIFICATION_ID = 100
     const val REQUEST_CODE_OPEN_APP = 1
-    const val ACTION_ACTIVITY_DESTROY = "action_activity_destroy"
+//    const val ACTION_ACTIVITY_DESTROY = "action_activity_destroy"
   }
 }
