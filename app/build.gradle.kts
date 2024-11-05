@@ -8,7 +8,7 @@ plugins {
 
 android {
   namespace = "dev.tberghuis.btmacrokb"
-  compileSdk = 34
+  compileSdk = 35
 
   defaultConfig {
     applicationId = "dev.tberghuis.btmacrokb"
