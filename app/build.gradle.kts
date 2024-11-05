@@ -72,6 +72,8 @@ dependencies {
   // need for @Serializable to compile when ktor not included
   // https://stackoverflow.com/questions/74366590/intellij-ktor-kotlinx-serialization-cannot-access-serializable-it-is-inter
   implementation(libs.kotlinx.serialization.json)
+
+  // glance not used in prod yet, only in tmp code
   implementation(libs.androidx.glance.appwidget)
   implementation(libs.androidx.glance.material3)
 
