@@ -1,8 +1,10 @@
 package dev.tberghuis.btmacrokb.service
 
 import android.app.Application
+import android.content.Intent
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.SavedStateHandle
+import dev.tberghuis.btmacrokb.service.MyBtService.Companion.ACTION_APP_EXIT
 import dev.tberghuis.btmacrokb.util.logd
 
 class StopServiceVm(
@@ -12,13 +14,14 @@ class StopServiceVm(
     logd("StopServiceVm init")
   }
 
+  // for some reason this is not called when a user closes freshly installed app on permission screen
+  // but in this case service has not started so service.stopSelf does not need to be called
   override fun onCleared() {
     logd("StopServiceVm onCleared")
-    // did not work
-//    val intent = Intent(application, MyBtService::class.java).apply {
-//      action = ACTION_APP_EXIT
-//    }
-//    application.startService(intent)
+    val intent = Intent(application, MyBtService::class.java).apply {
+      action = ACTION_APP_EXIT
+    }
+    application.startService(intent)
     super.onCleared()
   }
 }
