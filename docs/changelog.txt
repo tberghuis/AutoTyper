@@ -1,8 +1,12 @@
-v1.2   2024-11-06  dev-clipboard
+v1.2.1    2024-11-06    main
+  use vm oncleared to stop service instead of ACTION_ACTIVITY_DESTROY
+    bug configuration change, service killed after screen rotate
+
+v1.2      2024-11-06    dev-clipboard
   add Paste clipboard FAB to connection screen
   onstartcommand START_NON_STICKY
   activity ondestroy ACTION_ACTIVITY_DESTROY
 
-v1.1   2024-10-17
+v1.1      2024-10-17
   fix NPE ConnectionScreen.kt majorDeviceClass
   
