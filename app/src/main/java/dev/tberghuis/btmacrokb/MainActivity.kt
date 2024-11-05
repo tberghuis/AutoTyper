@@ -5,11 +5,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.lifecycle.viewmodel.compose.viewModel
 import dev.tberghuis.btmacrokb.nav.MyApp
 import dev.tberghuis.btmacrokb.service.MyBtService
 import dev.tberghuis.btmacrokb.service.MyBtService.Companion.ACTION_ACTIVITY_DESTROY
-import dev.tberghuis.btmacrokb.service.StopServiceVm
 import dev.tberghuis.btmacrokb.ui.theme.BtMacroKbTheme
 import dev.tberghuis.btmacrokb.util.logd
 
@@ -21,8 +19,6 @@ class MainActivity : ComponentActivity() {
     super.onCreate(savedInstanceState)
     enableEdgeToEdge()
     setContent {
-      // this is so VM oncleared event will trigger ACTION_APP_CLOSE
-      val vm: StopServiceVm = viewModel()
       BtMacroKbTheme {
         MyApp()
       }
