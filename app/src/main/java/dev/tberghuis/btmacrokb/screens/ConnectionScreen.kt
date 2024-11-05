@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -25,12 +26,14 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Bluetooth
 import androidx.compose.material.icons.filled.Computer
+import androidx.compose.material.icons.filled.ContentPaste
 import androidx.compose.material.icons.filled.Headphones
 import androidx.compose.material.icons.filled.Keyboard
 import androidx.compose.material.icons.filled.Smartphone
 import androidx.compose.material3.Button
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
@@ -90,6 +93,14 @@ fun ConnectionScreen(
     snackbarHost = {
       SnackbarHost(hostState = LocalSnackbarHostState.current)
     },
+    floatingActionButton = {
+      FloatingActionButton(
+        onClick = {
+        },
+      ) {
+        Icon(Icons.Filled.ContentPaste, contentDescription = "paste")
+      }
+    }
   ) { padding ->
     PairedDeviceList(padding)
   }
@@ -132,6 +143,9 @@ fun PairedDeviceList(
     }
     items(vm.pairedDevices.value) { device ->
       PairedDeviceCard(device)
+    }
+    item {
+      Spacer(Modifier.height(56.dp))
     }
   }
 }
