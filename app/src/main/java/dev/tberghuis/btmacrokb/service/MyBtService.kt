@@ -52,9 +52,11 @@ class MyBtService : Service() {
     super.onDestroy()
   }
 
-//  override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-//    return super.onStartCommand(intent, flags, startId)
-//  }
+  override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+    // fix crash play console ForegroundServiceStartNotAllowedException
+    // https://issuetracker.google.com/issues/307329994?pli=1
+    return START_NOT_STICKY
+  }
 
   @SuppressLint("ObsoleteSdkInt")
   private fun startInForeground() {
