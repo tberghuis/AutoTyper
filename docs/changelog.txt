@@ -1,4 +1,8 @@
+v1.2   2024-11-06  dev-clipboard
+  add Paste clipboard FAB to connection screen
+  onstartcommand START_NON_STICKY
+  activity ondestroy ACTION_ACTIVITY_DESTROY
 
-1.1 2024-10-17
+v1.1   2024-10-17
   fix NPE ConnectionScreen.kt majorDeviceClass
   
