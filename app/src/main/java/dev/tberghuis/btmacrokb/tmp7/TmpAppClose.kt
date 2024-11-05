@@ -9,7 +9,7 @@ import androidx.compose.material3.Text
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import dev.tberghuis.btmacrokb.service.MyBtService
-import dev.tberghuis.btmacrokb.service.MyBtService.Companion.ACTION_APP_EXIT
+import dev.tberghuis.btmacrokb.service.MyBtService.Companion.ACTION_ACTIVITY_DESTROY
 import dev.tberghuis.btmacrokb.ui.theme.BtMacroKbTheme
 import dev.tberghuis.btmacrokb.util.logd
 
@@ -38,7 +38,7 @@ fun appClose(context: Context) {
   logd("appClose")
 
   val intent = Intent(context, MyBtService::class.java).apply {
-    action = ACTION_APP_EXIT
+    action = ACTION_ACTIVITY_DESTROY
   }
   context.startService(intent)
 

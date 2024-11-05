@@ -19,6 +19,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -27,6 +28,7 @@ import androidx.navigation.NavOptions
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.PermissionStatus
 import com.google.accompanist.permissions.rememberPermissionState
+import dev.tberghuis.btmacrokb.MainActivity
 import dev.tberghuis.btmacrokb.util.logd
 import dev.tberghuis.btmacrokb.composables.LocalNavController
 import dev.tberghuis.btmacrokb.nav.Route
@@ -41,18 +43,27 @@ fun PermissionScreen() {
     else
       Manifest.permission.ACCESS_FINE_LOCATION,
   )
-
   val nav = LocalNavController.current
   val context = LocalContext.current
 
+  LaunchedEffect(btPermissionState) {
+    snapshotFlow { btPermissionState.status }
+      .collect {
+        if (it == PermissionStatus.Granted) {
+          logd("bt permission granted")
+          (context as MainActivity).hasBluetoothConnectionPermissions = true
+          nav.navigate(
+            Route.Connection,
+            NavOptions.Builder().setPopUpTo(Route.Permission, true).build()
+          )
+        } else {
+          logd("bt permission not granted")
+          (context as MainActivity).hasBluetoothConnectionPermissions = false
+        }
+      }
+  }
+
   if (btPermissionState.status == PermissionStatus.Granted) {
-    LaunchedEffect(Unit) {
-      logd("bt permission granted")
-      nav.navigate(
-        Route.Connection,
-        NavOptions.Builder().setPopUpTo(Route.Permission, true).build()
-      )
-    }
     return
   }
 
