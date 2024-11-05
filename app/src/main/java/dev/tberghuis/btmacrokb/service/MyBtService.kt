@@ -49,11 +49,13 @@ class MyBtService : Service() {
   override fun onDestroy() {
     logd("MyBtService onDestroy")
     myBtController.hidDeviceUnregisterApp()
+    // i have no idea what i am doing
+    stopForeground(STOP_FOREGROUND_REMOVE)
     super.onDestroy()
   }
 
   override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-   // // this does not work
+    // // this does not work
 //    when(intent?.action){
 //      ACTION_APP_EXIT -> {
 //        logd("onStartCommand ACTION_APP_EXIT")
