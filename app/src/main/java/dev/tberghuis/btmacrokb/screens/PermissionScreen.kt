@@ -19,7 +19,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -28,7 +27,6 @@ import androidx.navigation.NavOptions
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.PermissionStatus
 import com.google.accompanist.permissions.rememberPermissionState
-import dev.tberghuis.btmacrokb.MainActivity
 import dev.tberghuis.btmacrokb.util.logd
 import dev.tberghuis.btmacrokb.composables.LocalNavController
 import dev.tberghuis.btmacrokb.nav.Route
