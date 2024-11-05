@@ -23,12 +23,8 @@ class ConnectionVm(
   val connectedDevices = mutableStateOf<Set<BluetoothDevice>>(setOf())
   private var observeBtControllerJob: Job? = null
 
-  init {
-    observeBtController()
-  }
-
   // button to run this manually if service is killed
-  private fun observeBtController() {
+  fun observeBtController() {
     observeBtControllerJob?.cancel()
     observeBtControllerJob = viewModelScope.launch {
       getPairedDevices()
@@ -39,7 +35,7 @@ class ConnectionVm(
     }
   }
 
-  fun getPairedDevices() {
+  private fun getPairedDevices() {
     viewModelScope.launch {
       pairedDevices.value = application.provideMyBtService().myBtController.getPairedDevices()
     }

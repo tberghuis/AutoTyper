@@ -62,7 +62,8 @@ fun ConnectionScreen(
   vm: ConnectionVm = viewModel()
 ) {
   LifecycleEventEffect(Lifecycle.Event.ON_RESUME) {
-    vm.getPairedDevices()
+    logd("ON_RESUME")
+    vm.observeBtController()
   }
 
   val notificationPermissionState = if (Build.VERSION.SDK_INT >= 33) {
