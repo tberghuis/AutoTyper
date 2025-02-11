@@ -74,8 +74,8 @@ dependencies {
   implementation(libs.kotlinx.serialization.json)
 
   // glance not used in prod yet, only in tmp code
-  implementation(libs.androidx.glance.appwidget)
-  implementation(libs.androidx.glance.material3)
+//  implementation(libs.androidx.glance.appwidget)
+//  implementation(libs.androidx.glance.material3)
 
   testImplementation(libs.junit)
 
