@@ -1,19 +1,19 @@
 [versions]
 agp = "8.8.0"
-kotlin = "2.0.20"
+kotlin = "2.1.0"
 coreKtx = "1.15.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 lifecycleRuntimeKtx = "2.8.7"
-activityCompose = "1.9.3"
-composeBom = "2024.10.01"
+activityCompose = "1.10.0"
+composeBom = "2025.01.01"
 androidxLifecycle = "2.8.7"
-androidxNavigation = "2.8.3"
+androidxNavigation = "2.8.6"
 room = "2.6.1"
-kotlinx-serialization-json = "1.7.3"
+kotlinx-serialization-json = "1.8.0"
 # https://github.com/google/ksp/releases
-ksp = "2.0.20-1.0.25"
+ksp = "2.1.0-1.0.29"
 androidx-glance = "1.1.1"
 
 
