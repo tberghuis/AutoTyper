@@ -3,8 +3,12 @@ package dev.tberghuis.btmacrokb.tmp3
 import android.app.Application
 import android.bluetooth.BluetoothDevice
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.viewModelScope
 import dev.tberghuis.btmacrokb.screens.ConnectionVm
+import dev.tberghuis.btmacrokb.service.provideMyBtService
+import dev.tberghuis.btmacrokb.usecase.sendPayload
 import dev.tberghuis.btmacrokb.util.logd
+import kotlinx.coroutines.launch
 
 class TmpScreenVm(
   private val application: Application,
@@ -28,8 +32,8 @@ class TmpScreenVm(
   }
 
   fun typeHello() {
-    
+    viewModelScope.launch {
+      application.provideMyBtService().myBtController.sendString("hello\n")
+    }
   }
-
-
 }
