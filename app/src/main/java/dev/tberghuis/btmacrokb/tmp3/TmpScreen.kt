@@ -15,17 +15,27 @@ fun TmpScreen(
   Column {
 
     Button(onClick = {
+      vm.initController()
+    }) {
+      Text("init bt controller")
+    }
+
+    Button(onClick = {
       vm.findB450()
     }) {
       Text("find b450")
     }
 
-
-
     Button(onClick = {
       vm.connectB450()
     }) {
       Text("connect b450")
+    }
+
+    Button(onClick = {
+      vm.typeHello()
+    }) {
+      Text("type hello")
     }
   }
 }

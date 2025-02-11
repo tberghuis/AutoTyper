@@ -14,7 +14,7 @@ class TmpScreenVm(
 
   var b450Device: BluetoothDevice? = null
 
-  init {
+  fun initController() {
     connectionVm.observeBtController()
   }
 
@@ -23,9 +23,13 @@ class TmpScreenVm(
     logd("b450Device $b450Device")
   }
 
-
   fun connectB450() {
     connectionVm.connect(b450Device!!)
   }
+
+  fun typeHello() {
+    
+  }
+
 
 }
