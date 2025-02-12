@@ -26,18 +26,12 @@ import kotlinx.coroutines.launch
 private class SingleUseBtController(
   private val application: Application
 ) {
-  private val btAdapter: BluetoothAdapter
-  private val hidDevice: StateFlow<BluetoothHidDevice?>
+  private val btAdapter = initAdapter()
+  private val hidDevice = getProfileProxy()
   private val connected = MutableStateFlow(false)
   private val isRegisteredForHid = MutableStateFlow(false)
 
   private val hidDeviceCallback = initHidDeviceCallback()
-
-    init {
-      btAdapter = initAdapter()
-      hidDevice = initProfileProxy()
-    }
-
 
   @SuppressLint("MissingPermission")
   fun getDevice(address: String): BluetoothDevice? {
@@ -88,7 +82,7 @@ private class SingleUseBtController(
     return bluetoothManager.adapter
   }
 
-  private fun initProfileProxy(): StateFlow<BluetoothHidDevice?> {
+  private fun getProfileProxy(): StateFlow<BluetoothHidDevice?> {
     val hidDevice = MutableStateFlow<BluetoothHidDevice?>(null)
     val serviceListener = object : BluetoothProfile.ServiceListener {
       override fun onServiceConnected(profile: Int, proxy: BluetoothProfile?) {
