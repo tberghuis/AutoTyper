@@ -31,32 +31,12 @@ private class SingleUseBtController(
   private val connected = MutableStateFlow(false)
   private val isRegisteredForHid = MutableStateFlow(false)
 
-  private val hidDeviceCallback = object : BluetoothHidDevice.Callback() {
-    @SuppressLint("MissingPermission")
-    override fun onConnectionStateChanged(device: BluetoothDevice, state: Int) {
-      super.onConnectionStateChanged(device, state)
-      logd("hidDeviceCallback onConnectionStateChanged device=${device.name} state=$state")
-      when (state) {
-        BluetoothProfile.STATE_CONNECTED -> {
-          connected.value = true
-        }
+  private val hidDeviceCallback = initHidDeviceCallback()
 
-        else -> {
-          connected.value = false
-        }
-      }
+    init {
+      btAdapter = initAdapter()
+      hidDevice = initProfileProxy()
     }
-
-    override fun onAppStatusChanged(pluggedDevice: BluetoothDevice?, registered: Boolean) {
-      super.onAppStatusChanged(pluggedDevice, registered)
-      isRegisteredForHid.value = registered
-    }
-  }
-
-  init {
-    btAdapter = initAdapter()
-    hidDevice = initProfileProxy()
-  }
 
 
   @SuppressLint("MissingPermission")
@@ -129,6 +109,29 @@ private class SingleUseBtController(
     )
     return hidDevice
   }
+
+  private fun initHidDeviceCallback() = object : BluetoothHidDevice.Callback() {
+    @SuppressLint("MissingPermission")
+    override fun onConnectionStateChanged(device: BluetoothDevice, state: Int) {
+      super.onConnectionStateChanged(device, state)
+      logd("hidDeviceCallback onConnectionStateChanged device=${device.name} state=$state")
+      when (state) {
+        BluetoothProfile.STATE_CONNECTED -> {
+          connected.value = true
+        }
+
+        else -> {
+          connected.value = false
+        }
+      }
+    }
+
+    override fun onAppStatusChanged(pluggedDevice: BluetoothDevice?, registered: Boolean) {
+      super.onAppStatusChanged(pluggedDevice, registered)
+      isRegisteredForHid.value = registered
+    }
+  }
+
 
 }
 
