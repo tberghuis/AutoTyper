@@ -37,7 +37,7 @@ class Tmp4BtController(
     bluetoothManager.adapter
   }
   private val hidDevice: StateFlow<BluetoothHidDevice?>
-  private val connectedDevice = MutableStateFlow<BluetoothDevice?>(null)
+  private val connected = MutableStateFlow(false)
   private val isRegisteredForHid = MutableStateFlow(false)
 
   private val hidDeviceCallback = object : BluetoothHidDevice.Callback() {
@@ -47,15 +47,11 @@ class Tmp4BtController(
       logd("hidDeviceCallback onConnectionStateChanged device=${device.name} state=$state")
       when (state) {
         BluetoothProfile.STATE_CONNECTED -> {
-          connectedDevice.update {
-            device
-          }
+          connected.value = true
         }
 
         else -> {
-          connectedDevice.update {
-            null
-          }
+          connected.value = false
         }
       }
     }
@@ -112,17 +108,16 @@ class Tmp4BtController(
 
   @SuppressLint("MissingPermission")
   fun sendHello() {
-
+    val b450 = findB450(btAdapter) ?: return
     scope.launch {
       isRegisteredForHid.filter { it }.first()
       val hid = hidDevice.filterNotNull().first()
-      hid.connect(findB450(btAdapter))
-      val b450 = connectedDevice.filterNotNull().first()
+      hid.connect(b450)
+      connected.filter { it }.first()
+      delay(1000)
       sendString("hello\n", b450, hid)
     }
   }
-
-
 }
 
 @SuppressLint("MissingPermission")
