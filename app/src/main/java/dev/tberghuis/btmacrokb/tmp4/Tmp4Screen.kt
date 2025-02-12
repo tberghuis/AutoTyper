@@ -22,12 +22,7 @@ fun Tmp4Screen() {
 
   Column {
     Text("hello tmp4")
-    Button(onClick = {
-      controller?.getPairedDevices()
-    }) {
-      Text("get paired devices")
-    }
-
+    
     Button(onClick = {
       controller?.findB450()
     }) {

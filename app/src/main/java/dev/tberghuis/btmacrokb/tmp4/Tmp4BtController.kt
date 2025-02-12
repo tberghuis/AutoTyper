@@ -68,16 +68,9 @@ class Tmp4BtController(
     }
   }
 
-
   @SuppressLint("MissingPermission")
-  fun getPairedDevices() {
-    val bondedDevices = btAdapter.bondedDevices
-    logd("getPairedDevices bondedDevices $bondedDevices")
-    pairedDevices = btAdapter.bondedDevices?.toList() ?: listOf()
-  }
-
   fun findB450() {
-    b450Device = pairedDevices?.find {
+    b450Device = btAdapter.bondedDevices?.find {
       it.address.equals("28:7F:CF:BD:00:B9", true)
     }
     logd("findB450 $b450Device")
