@@ -114,7 +114,7 @@ class Tmp4BtController(
       val hid = hidDevice.filterNotNull().first()
       hid.connect(b450)
       connected.filter { it }.first()
-      delay(1000)
+      delay(2000)
       sendString("hello\n", b450, hid)
     }
   }
