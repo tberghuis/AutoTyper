@@ -57,28 +57,22 @@ class SingleUseBtController2(
   }
 
   @SuppressLint("MissingPermission")
-  private suspend fun connect(device: BluetoothDevice) {
+  private suspend fun connect(device: BluetoothDevice): BluetoothHidDevice {
     registerApp()
     CoroutineScope(coroutineContext).launch {
       isRegisteredForHid.filter { it }.first()
       val hid = hidDevice.filterNotNull().first()
       hid.connect(device)
     }
+    connected.filter { it }.first()
+    delay(2000)
+    return hidDevice.filterNotNull().first()
   }
-
-//  suspend fun ready(): BluetoothHidDevice {
-//    connected.filter { it }.first()
-//    delay(2000)
-//    return hidDevice.filterNotNull().first()
-//  }
 
   @SuppressLint("MissingPermission")
   suspend fun sendPayload(address: String, payload: String) {
     val device = getDevice(address)
-    connect(device!!)
-    connected.filter { it }.first()
-    delay(2000)
-    val hid = hidDevice.filterNotNull().first()
+    val hid = connect(device!!)
     payload.toCharArray().forEach { char ->
       hid.sendReport(
         device,
@@ -89,6 +83,10 @@ class SingleUseBtController2(
       hid.sendReport(device, KEYBOARD_ID, ByteArray(8) { 0 })
       delay(20)
     }
+
+    // todo disconnect
+    // unregister app
+    
   }
 
   ////////// initializer functions
