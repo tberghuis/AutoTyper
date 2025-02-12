@@ -34,4 +34,15 @@ class Tmp4BtController(
     logd("findB450 $b450Device")
   }
 
+  fun getProfileProxy(){
+
+  }
+
+  fun registerApp(){
+    
+  }
+
+  fun connectB450(){
+
+  }
 }
