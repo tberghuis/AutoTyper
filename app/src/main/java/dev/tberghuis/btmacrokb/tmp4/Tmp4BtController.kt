@@ -9,11 +9,14 @@ import android.bluetooth.BluetoothHidDeviceAppSdpSettings
 import android.bluetooth.BluetoothManager
 import android.bluetooth.BluetoothProfile
 import android.content.Context
+import dev.tberghuis.btmacrokb.KEYBOARD_ID
+import dev.tberghuis.btmacrokb.asciiCharToReportByteArray
 import dev.tberghuis.btmacrokb.kbDescriptor
 import dev.tberghuis.btmacrokb.util.logd
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.filter
@@ -118,11 +121,35 @@ class Tmp4BtController(
     }
   }
 
+  fun sendHello() {
+    scope.launch {
+      val b450 = connectedDevice.filterNotNull().first()
+      val hid = hidDevice.filterNotNull().first()
+      sendString("hello\n", b450, hid)
+    }
+  }
+
 }
 
 @SuppressLint("MissingPermission")
 fun findB450(btAdapter: BluetoothAdapter): BluetoothDevice? {
   return btAdapter.bondedDevices?.find {
     it.address.equals("28:7F:CF:BD:00:B9", true)
+  }
+}
+
+
+@SuppressLint("MissingPermission")
+private suspend fun sendString(s: String, device: BluetoothDevice, hid: BluetoothHidDevice) {
+  logd("sendString")
+  s.toCharArray().forEach { char ->
+    hid.sendReport(
+      device,
+      KEYBOARD_ID,
+      asciiCharToReportByteArray[char] ?: return@forEach
+    )
+    delay(5)
+    hid.sendReport(device, KEYBOARD_ID, ByteArray(8) { 0 })
+    delay(20)
   }
 }
