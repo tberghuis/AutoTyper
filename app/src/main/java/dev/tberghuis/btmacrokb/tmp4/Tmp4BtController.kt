@@ -16,6 +16,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
@@ -106,11 +107,17 @@ class Tmp4BtController(
     }
   }
 
+  @SuppressLint("MissingPermission")
   fun connectB450() {
-
     val b450 = findB450(btAdapter)
-
+    scope.launch {
+      logd("connect")
+      isRegisteredForHid.filter { it }.first()
+      logd("connect isRegisteredForHid")
+      hidDevice.filterNotNull().first().connect(b450)
+    }
   }
+
 }
 
 @SuppressLint("MissingPermission")
