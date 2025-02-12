@@ -5,24 +5,69 @@ import android.app.Application
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothHidDevice
+import android.bluetooth.BluetoothHidDeviceAppSdpSettings
 import android.bluetooth.BluetoothManager
 import android.bluetooth.BluetoothProfile
 import android.content.Context
+import dev.tberghuis.btmacrokb.kbDescriptor
 import dev.tberghuis.btmacrokb.util.logd
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
 class Tmp4BtController(
   private val application: Application
 ) {
+  private val job = SupervisorJob()
+  val scope = CoroutineScope(Dispatchers.IO + job)
+
+
   private val btAdapter: BluetoothAdapter by lazy {
     val bluetoothManager =
       application.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
     bluetoothManager.adapter
   }
 
+  private val hidDevice = getProfileProxy()
+
   var pairedDevices: List<BluetoothDevice>? = null
   var b450Device: BluetoothDevice? = null
+
+  val connectedDevice = MutableStateFlow<BluetoothDevice?>(null)
+  private val isRegisteredForHid = MutableStateFlow(false)
+
+  private val hidDeviceCallback = object : BluetoothHidDevice.Callback() {
+    @SuppressLint("MissingPermission")
+    override fun onConnectionStateChanged(device: BluetoothDevice, state: Int) {
+      super.onConnectionStateChanged(device, state)
+      logd("hidDeviceCallback onConnectionStateChanged device=${device.name} state=$state")
+      when (state) {
+        BluetoothProfile.STATE_CONNECTED -> {
+          connectedDevice.update {
+            device
+          }
+        }
+
+        else -> {
+          connectedDevice.update {
+            null
+          }
+        }
+      }
+    }
+
+    override fun onAppStatusChanged(pluggedDevice: BluetoothDevice?, registered: Boolean) {
+      super.onAppStatusChanged(pluggedDevice, registered)
+      isRegisteredForHid.value = registered
+    }
+  }
+
 
   @SuppressLint("MissingPermission")
   fun getPairedDevices() {
@@ -38,7 +83,7 @@ class Tmp4BtController(
     logd("findB450 $b450Device")
   }
 
-  fun getProfileProxy(): StateFlow<BluetoothHidDevice?> {
+  private fun getProfileProxy(): StateFlow<BluetoothHidDevice?> {
     val hidDevice = MutableStateFlow<BluetoothHidDevice?>(null)
     val serviceListener = object : BluetoothProfile.ServiceListener {
       override fun onServiceConnected(profile: Int, proxy: BluetoothProfile?) {
@@ -46,6 +91,7 @@ class Tmp4BtController(
         logd("GetProfileProxy onServiceConnected proxy $proxy")
         hidDevice.value = proxy as BluetoothHidDevice
       }
+
       override fun onServiceDisconnected(profile: Int) {
         logd("GetProfileProxy onServiceDisconnected profile $profile")
         hidDevice.value = null
@@ -59,11 +105,24 @@ class Tmp4BtController(
     return hidDevice
   }
 
-  fun registerApp() {
-
+  // todo testing with missing permission
+  @SuppressLint("MissingPermission")
+  private fun registerApp() {
+    logd("registerApp")
+    val sdpRecord = BluetoothHidDeviceAppSdpSettings(
+      "Bluetooth HID Keyboard",
+      "Bluetooth HID Keyboard",
+      "Fixed Point",
+      BluetoothHidDevice.SUBCLASS1_COMBO,
+      kbDescriptor
+    )
+    scope.launch {
+      hidDevice.filterNotNull().first()
+        .registerApp(sdpRecord, null, null, Runnable::run, hidDeviceCallback)
+    }
   }
 
   fun connectB450() {
-
+    registerApp()
   }
 }
