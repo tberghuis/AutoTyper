@@ -86,7 +86,7 @@ class SingleUseBtController2(
 
     // todo disconnect
     // unregister app
-    
+
   }
 
   ////////// initializer functions
