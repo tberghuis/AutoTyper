@@ -134,6 +134,8 @@ suspend fun tmp5SendPayload(application: Application, address: String, payload: 
   sendPayload(payload, device, hid)
 }
 
+// todo move to SingleUseBtController method, make connect(), ready() private,
+// connectedDevice MutableStateFlow, tmp6 package
 @SuppressLint("MissingPermission")
 private suspend fun sendPayload(payload: String, device: BluetoothDevice, hid: BluetoothHidDevice) {
   logd("sendPayload")
