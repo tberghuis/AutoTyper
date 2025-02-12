@@ -9,7 +9,6 @@ import android.bluetooth.BluetoothHidDeviceAppSdpSettings
 import android.bluetooth.BluetoothManager
 import android.bluetooth.BluetoothProfile
 import android.content.Context
-import android.provider.Browser.sendString
 import dev.tberghuis.btmacrokb.KEYBOARD_ID
 import dev.tberghuis.btmacrokb.asciiCharToReportByteArray
 import dev.tberghuis.btmacrokb.kbDescriptor
@@ -57,7 +56,6 @@ private class SingleUseBtController(
   init {
     btAdapter = getAdapter()
     hidDevice = getProfileProxy()
-//    registerApp()
   }
 
   private fun getAdapter(): BluetoothAdapter {
