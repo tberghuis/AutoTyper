@@ -9,8 +9,12 @@ import android.bluetooth.BluetoothHidDeviceAppSdpSettings
 import android.bluetooth.BluetoothManager
 import android.bluetooth.BluetoothProfile
 import android.content.Context
+import android.provider.Browser.sendString
+import dev.tberghuis.btmacrokb.KEYBOARD_ID
+import dev.tberghuis.btmacrokb.asciiCharToReportByteArray
 import dev.tberghuis.btmacrokb.kbDescriptor
 import dev.tberghuis.btmacrokb.util.logd
+import kotlin.coroutines.coroutineContext
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -62,6 +66,13 @@ private class SingleUseBtController(
     return bluetoothManager.adapter
   }
 
+  @SuppressLint("MissingPermission")
+  fun getDevice(address: String): BluetoothDevice? {
+    return btAdapter.bondedDevices?.find {
+      it.address.equals(address, true)
+    }
+  }
+
   private fun getProfileProxy(): StateFlow<BluetoothHidDevice?> {
     val hidDevice = MutableStateFlow<BluetoothHidDevice?>(null)
     val serviceListener = object : BluetoothProfile.ServiceListener {
@@ -102,9 +113,9 @@ private class SingleUseBtController(
   }
 
   @SuppressLint("MissingPermission")
-  fun CoroutineScope.connect(device: BluetoothDevice) {
-    registerApp()
-    launch {
+  fun connect(device: BluetoothDevice, scope: CoroutineScope) {
+    scope.registerApp()
+    scope.launch {
       isRegisteredForHid.filter { it }.first()
       val hid = hidDevice.filterNotNull().first()
       hid.connect(device)
@@ -118,7 +129,26 @@ private class SingleUseBtController(
   }
 }
 
+@SuppressLint("MissingPermission")
+suspend fun tmp5SendPayload(application: Application, address: String, payload: String) {
+  val controller = SingleUseBtController(application)
+  val device = controller.getDevice(address)
+  controller.connect(device!!, CoroutineScope(coroutineContext))
+  val hid = controller.ready()
+  sendPayload(payload, device, hid)
+}
 
-suspend fun sendPayload(address: String, payload: String) {
-
+@SuppressLint("MissingPermission")
+private suspend fun sendPayload(payload: String, device: BluetoothDevice, hid: BluetoothHidDevice) {
+  logd("sendPayload")
+  payload.toCharArray().forEach { char ->
+    hid.sendReport(
+      device,
+      KEYBOARD_ID,
+      asciiCharToReportByteArray[char] ?: return@forEach
+    )
+    delay(5)
+    hid.sendReport(device, KEYBOARD_ID, ByteArray(8) { 0 })
+    delay(20)
+  }
 }

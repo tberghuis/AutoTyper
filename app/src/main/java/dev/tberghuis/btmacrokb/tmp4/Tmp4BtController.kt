@@ -115,7 +115,7 @@ class Tmp4BtController(
       hid.connect(b450)
       connected.filter { it }.first()
       delay(2000)
-      sendString("hello\n", b450, hid)
+      sendPayload("hello\n", b450, hid)
     }
   }
 }
@@ -127,11 +127,10 @@ fun findB450(btAdapter: BluetoothAdapter): BluetoothDevice? {
   }
 }
 
-
 @SuppressLint("MissingPermission")
-private suspend fun sendString(s: String, device: BluetoothDevice, hid: BluetoothHidDevice) {
-  logd("sendString")
-  s.toCharArray().forEach { char ->
+private suspend fun sendPayload(payload: String, device: BluetoothDevice, hid: BluetoothHidDevice) {
+  logd("sendPayload")
+  payload.toCharArray().forEach { char ->
     hid.sendReport(
       device,
       KEYBOARD_ID,
