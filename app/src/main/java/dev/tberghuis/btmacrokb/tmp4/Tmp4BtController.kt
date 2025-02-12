@@ -17,12 +17,15 @@ class Tmp4BtController(
     bluetoothManager.adapter
   }
 
+  var pairedDevices: List<BluetoothDevice>? = null
+
   @SuppressLint("MissingPermission")
-  fun getPairedDevices(): List<BluetoothDevice> {
-    logd("getPairedDevices")
-    logd("getPairedDevices btAdapter $btAdapter")
+  fun getPairedDevices() {
     val bondedDevices = btAdapter.bondedDevices
     logd("getPairedDevices bondedDevices $bondedDevices")
-    return btAdapter.bondedDevices?.toList() ?: listOf()
+    pairedDevices = btAdapter.bondedDevices?.toList() ?: listOf()
   }
+
+  
+
 }
