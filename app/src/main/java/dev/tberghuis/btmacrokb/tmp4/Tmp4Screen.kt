@@ -29,5 +29,11 @@ fun Tmp4Screen() {
       Text("connect b450")
     }
 
+    Button(onClick = {
+      controller?.sendHello()
+    }) {
+      Text("send hello")
+    }
+
   }
 }
