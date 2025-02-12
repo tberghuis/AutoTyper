@@ -18,6 +18,7 @@ class Tmp4BtController(
   }
 
   var pairedDevices: List<BluetoothDevice>? = null
+  var b450Device: BluetoothDevice? = null
 
   @SuppressLint("MissingPermission")
   fun getPairedDevices() {
@@ -26,6 +27,11 @@ class Tmp4BtController(
     pairedDevices = btAdapter.bondedDevices?.toList() ?: listOf()
   }
 
-  
+  fun findB450(){
+    b450Device = pairedDevices?.find {
+      it.address.equals("28:7F:CF:BD:00:B9",true)
+    }
+    logd("findB450 $b450Device")
+  }
 
 }

@@ -27,5 +27,12 @@ fun Tmp4Screen() {
     }) {
       Text("get paired devices")
     }
+
+    Button(onClick = {
+      controller?.findB450()
+    }) {
+      Text("find b450")
+    }
+
   }
 }
