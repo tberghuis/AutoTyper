@@ -111,23 +111,17 @@ class Tmp4BtController(
   }
 
   @SuppressLint("MissingPermission")
-  fun connectB450() {
-    val b450 = findB450(btAdapter)
-    scope.launch {
-      logd("connect")
-      isRegisteredForHid.filter { it }.first()
-      logd("connect isRegisteredForHid")
-      hidDevice.filterNotNull().first().connect(b450)
-    }
-  }
-
   fun sendHello() {
+
     scope.launch {
-      val b450 = connectedDevice.filterNotNull().first()
+      isRegisteredForHid.filter { it }.first()
       val hid = hidDevice.filterNotNull().first()
+      hid.connect(findB450(btAdapter))
+      val b450 = connectedDevice.filterNotNull().first()
       sendString("hello\n", b450, hid)
     }
   }
+
 
 }
 
