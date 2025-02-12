@@ -30,7 +30,6 @@ private class SingleUseBtController(
   private val hidDevice = getProfileProxy()
   private val connected = MutableStateFlow(false)
   private val isRegisteredForHid = MutableStateFlow(false)
-
   private val hidDeviceCallback = initHidDeviceCallback()
 
   @SuppressLint("MissingPermission")
@@ -39,7 +38,6 @@ private class SingleUseBtController(
       it.address.equals(address, true)
     }
   }
-
 
   // todo testing with missing permission
   @SuppressLint("MissingPermission")
@@ -125,8 +123,6 @@ private class SingleUseBtController(
       isRegisteredForHid.value = registered
     }
   }
-
-
 }
 
 @SuppressLint("MissingPermission")
