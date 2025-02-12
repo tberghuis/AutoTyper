@@ -22,8 +22,10 @@ fun Tmp4Screen() {
 
   Column {
     Text("hello tmp4")
-    Button(onClick = {}) {
-      Text("button")
+    Button(onClick = {
+      controller?.getPairedDevices()
+    }) {
+      Text("get paired devices")
     }
   }
 }
