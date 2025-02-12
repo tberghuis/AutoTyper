@@ -58,11 +58,6 @@ private class SingleUseBtController(
     hidDevice = getProfileProxy()
   }
 
-  private fun getAdapter(): BluetoothAdapter {
-    val bluetoothManager =
-      application.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
-    return bluetoothManager.adapter
-  }
 
   @SuppressLint("MissingPermission")
   fun getDevice(address: String): BluetoothDevice? {
@@ -71,27 +66,6 @@ private class SingleUseBtController(
     }
   }
 
-  private fun getProfileProxy(): StateFlow<BluetoothHidDevice?> {
-    val hidDevice = MutableStateFlow<BluetoothHidDevice?>(null)
-    val serviceListener = object : BluetoothProfile.ServiceListener {
-      override fun onServiceConnected(profile: Int, proxy: BluetoothProfile?) {
-        logd("GetProfileProxy onServiceConnected profile $profile")
-        logd("GetProfileProxy onServiceConnected proxy $proxy")
-        hidDevice.value = proxy as BluetoothHidDevice
-      }
-
-      override fun onServiceDisconnected(profile: Int) {
-        logd("GetProfileProxy onServiceDisconnected profile $profile")
-        hidDevice.value = null
-      }
-    }
-    btAdapter.getProfileProxy(
-      application,
-      serviceListener,
-      BluetoothProfile.HID_DEVICE
-    )
-    return hidDevice
-  }
 
   // todo testing with missing permission
   @SuppressLint("MissingPermission")
@@ -125,6 +99,37 @@ private class SingleUseBtController(
     delay(2000)
     return hidDevice.filterNotNull().first()
   }
+
+  ////////// initializer functions
+
+  private fun getAdapter(): BluetoothAdapter {
+    val bluetoothManager =
+      application.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
+    return bluetoothManager.adapter
+  }
+
+  private fun getProfileProxy(): StateFlow<BluetoothHidDevice?> {
+    val hidDevice = MutableStateFlow<BluetoothHidDevice?>(null)
+    val serviceListener = object : BluetoothProfile.ServiceListener {
+      override fun onServiceConnected(profile: Int, proxy: BluetoothProfile?) {
+        logd("GetProfileProxy onServiceConnected profile $profile")
+        logd("GetProfileProxy onServiceConnected proxy $proxy")
+        hidDevice.value = proxy as BluetoothHidDevice
+      }
+
+      override fun onServiceDisconnected(profile: Int) {
+        logd("GetProfileProxy onServiceDisconnected profile $profile")
+        hidDevice.value = null
+      }
+    }
+    btAdapter.getProfileProxy(
+      application,
+      serviceListener,
+      BluetoothProfile.HID_DEVICE
+    )
+    return hidDevice
+  }
+
 }
 
 @SuppressLint("MissingPermission")
