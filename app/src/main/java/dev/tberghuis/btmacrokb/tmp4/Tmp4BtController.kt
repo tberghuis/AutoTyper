@@ -26,7 +26,7 @@ class Tmp4BtController(
   private val application: Application
 ) {
   private val job = SupervisorJob()
-  val scope = CoroutineScope(Dispatchers.IO + job)
+  private val scope = CoroutineScope(Dispatchers.IO + job)
 
   private val btAdapter: BluetoothAdapter by lazy {
     val bluetoothManager =
@@ -34,7 +34,7 @@ class Tmp4BtController(
     bluetoothManager.adapter
   }
   private val hidDevice: StateFlow<BluetoothHidDevice?>
-  val connectedDevice = MutableStateFlow<BluetoothDevice?>(null)
+  private val connectedDevice = MutableStateFlow<BluetoothDevice?>(null)
   private val isRegisteredForHid = MutableStateFlow(false)
 
   private val hidDeviceCallback = object : BluetoothHidDevice.Callback() {
