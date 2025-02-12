@@ -54,8 +54,8 @@ private class SingleUseBtController(
   }
 
   init {
-    btAdapter = getAdapter()
-    hidDevice = getProfileProxy()
+    btAdapter = initAdapter()
+    hidDevice = initProfileProxy()
   }
 
 
@@ -102,13 +102,13 @@ private class SingleUseBtController(
 
   ////////// initializer functions
 
-  private fun getAdapter(): BluetoothAdapter {
+  private fun initAdapter(): BluetoothAdapter {
     val bluetoothManager =
       application.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
     return bluetoothManager.adapter
   }
 
-  private fun getProfileProxy(): StateFlow<BluetoothHidDevice?> {
+  private fun initProfileProxy(): StateFlow<BluetoothHidDevice?> {
     val hidDevice = MutableStateFlow<BluetoothHidDevice?>(null)
     val serviceListener = object : BluetoothProfile.ServiceListener {
       override fun onServiceConnected(profile: Int, proxy: BluetoothProfile?) {
