@@ -22,11 +22,11 @@ fun Tmp4Screen() {
 
   Column {
     Text("hello tmp4")
-    
+
     Button(onClick = {
-      controller?.findB450()
+      controller?.connectB450()
     }) {
-      Text("find b450")
+      Text("connect b450")
     }
 
   }

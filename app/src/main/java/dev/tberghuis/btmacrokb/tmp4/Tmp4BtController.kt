@@ -27,18 +27,12 @@ class Tmp4BtController(
   private val job = SupervisorJob()
   val scope = CoroutineScope(Dispatchers.IO + job)
 
-
   private val btAdapter: BluetoothAdapter by lazy {
     val bluetoothManager =
       application.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
     bluetoothManager.adapter
   }
-
-  private val hidDevice = getProfileProxy()
-
-  var pairedDevices: List<BluetoothDevice>? = null
-  var b450Device: BluetoothDevice? = null
-
+  private val hidDevice: StateFlow<BluetoothHidDevice?>
   val connectedDevice = MutableStateFlow<BluetoothDevice?>(null)
   private val isRegisteredForHid = MutableStateFlow(false)
 
@@ -68,12 +62,9 @@ class Tmp4BtController(
     }
   }
 
-  @SuppressLint("MissingPermission")
-  fun findB450() {
-    b450Device = btAdapter.bondedDevices?.find {
-      it.address.equals("28:7F:CF:BD:00:B9", true)
-    }
-    logd("findB450 $b450Device")
+  init {
+    hidDevice = getProfileProxy()
+    registerApp()
   }
 
   private fun getProfileProxy(): StateFlow<BluetoothHidDevice?> {
@@ -116,6 +107,15 @@ class Tmp4BtController(
   }
 
   fun connectB450() {
-    registerApp()
+
+    val b450 = findB450(btAdapter)
+
+  }
+}
+
+@SuppressLint("MissingPermission")
+fun findB450(btAdapter: BluetoothAdapter): BluetoothDevice? {
+  return btAdapter.bondedDevices?.find {
+    it.address.equals("28:7F:CF:BD:00:B9", true)
   }
 }
