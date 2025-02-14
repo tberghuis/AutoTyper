@@ -22,6 +22,9 @@ class Tmp6ScreenVm(
 
     val encrypted = data.queryParameterNames.contains("encrypted")
     if (encrypted) {
+      // todo get password datastore
+//      if no password return
+//      test wrong password
       payloadString = SimpleAES.decrypt(payloadString, "1234")
     }
 
