@@ -1,6 +1,7 @@
 package dev.tberghuis.btmacrokb.tmp6
 
 import android.app.Application
+import android.net.Uri
 import androidx.lifecycle.AndroidViewModel
 import dev.tberghuis.btmacrokb.util.logd
 
@@ -9,8 +10,11 @@ class Tmp6ScreenVm(
 ) : AndroidViewModel(application) {
 
 
-  fun runOnce() {
-    logd("run once")
+  // call from rememberSaveable to only run once
+  fun processDataUri(data: Uri) {
+    logd("processDataUri $data")
+
+
   }
 
 }
