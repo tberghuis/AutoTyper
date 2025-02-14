@@ -10,6 +10,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import dev.tberghuis.btmacrokb.composables.LocalNavController
+import dev.tberghuis.btmacrokb.nav.Route
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -23,7 +24,7 @@ fun AutoTyperTopBar() {
     actions = {
       IconButton(
         onClick = {
-          nav.navigate("settings")
+          nav.navigate(Route.Settings)
         },
         modifier = Modifier
       ) {
