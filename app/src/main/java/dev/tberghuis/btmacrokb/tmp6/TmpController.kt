@@ -89,8 +89,6 @@ class SingleUseBtController2(
       delay(20)
     }
 
-    // todo disconnect
-    // unregister app
     delay(100)
     hid.disconnect(device)
     hid.unregisterApp()
