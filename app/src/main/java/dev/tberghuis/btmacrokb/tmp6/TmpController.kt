@@ -49,7 +49,7 @@ class SingleUseBtController2(
 
   // todo testing with missing permission
   @SuppressLint("MissingPermission")
-  private suspend fun registerApp() {
+  private fun registerApp(hid: BluetoothHidDevice) {
     logd("registerApp")
     val sdpRecord = BluetoothHidDeviceAppSdpSettings(
       "Bluetooth HID Keyboard",
@@ -58,16 +58,13 @@ class SingleUseBtController2(
       BluetoothHidDevice.SUBCLASS1_COMBO,
       kbDescriptor
     )
-    CoroutineScope(coroutineContext).launch {
-      hidDevice.filterNotNull().first()
-        .registerApp(sdpRecord, null, null, Runnable::run, hidDeviceCallback)
-    }
+    hid.registerApp(sdpRecord, null, null, Runnable::run, hidDeviceCallback)
   }
 
   @SuppressLint("MissingPermission")
   private suspend fun connect(device: BluetoothDevice): BluetoothHidDevice {
-    registerApp()
     val hid = hidDevice.filterNotNull().first()
+    registerApp(hid)
     CoroutineScope(coroutineContext).launch {
       isRegisteredForHid.filter { it }.first()
       hid.connect(device)
