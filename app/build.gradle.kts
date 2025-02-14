@@ -89,6 +89,7 @@ dependencies {
 
   ksp(libs.room.compiler)
 
+  implementation(libs.androidx.dataStore.preferences)
 
   // for dev only
 //  val ktorVersion = "2.3.12"

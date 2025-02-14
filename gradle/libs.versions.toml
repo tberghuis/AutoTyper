@@ -15,6 +15,7 @@ kotlinx-serialization-json = "1.8.0"
 # https://github.com/google/ksp/releases
 ksp = "2.1.0-1.0.29"
 androidx-glance = "1.1.1"
+androidxDataStore = "1.1.2"
 
 
 # manual version check
@@ -45,6 +46,8 @@ androidx-compose-material-iconsExtended = { module = "androidx.compose.material:
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization-json" }
 androidx-glance-appwidget = { module = "androidx.glance:glance-appwidget", version.ref = "androidx-glance" }
 androidx-glance-material3 = { module = "androidx.glance:glance-material3", version.ref = "androidx-glance" }
+
+androidx-dataStore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "androidxDataStore" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
