@@ -67,14 +67,14 @@ class SingleUseBtController2(
   @SuppressLint("MissingPermission")
   private suspend fun connect(device: BluetoothDevice): BluetoothHidDevice {
     registerApp()
+    val hid = hidDevice.filterNotNull().first()
     CoroutineScope(coroutineContext).launch {
       isRegisteredForHid.filter { it }.first()
-      val hid = hidDevice.filterNotNull().first()
       hid.connect(device)
     }
     connected.filter { it }.first()
     delay(2000)
-    return hidDevice.filterNotNull().first()
+    return hid
   }
 
   @SuppressLint("MissingPermission")
@@ -94,7 +94,9 @@ class SingleUseBtController2(
 
     // todo disconnect
     // unregister app
-
+    delay(100)
+    hid.disconnect(device)
+    hid.unregisterApp()
   }
 
   ////////// initializer functions
