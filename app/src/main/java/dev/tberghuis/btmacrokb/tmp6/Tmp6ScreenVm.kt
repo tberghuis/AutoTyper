@@ -13,8 +13,10 @@ class Tmp6ScreenVm(
   // call from rememberSaveable to only run once
   fun processDataUri(data: Uri) {
     logd("processDataUri $data")
+    val deviceString = data.getQueryParameter("device") ?: return
+    val payloadString = data.getQueryParameter("payload") ?: return
 
-
+    logd("deviceString $deviceString payloadString $payloadString")
   }
 
 }
