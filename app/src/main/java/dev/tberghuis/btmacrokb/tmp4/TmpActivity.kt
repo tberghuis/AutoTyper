@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import dev.tberghuis.btmacrokb.tmp3.TmpScreen
+import dev.tberghuis.btmacrokb.tmp6.Tmp6Screen
 import dev.tberghuis.btmacrokb.ui.theme.BtMacroKbTheme
 
 class TmpActivity : ComponentActivity() {
@@ -13,7 +14,7 @@ class TmpActivity : ComponentActivity() {
     enableEdgeToEdge()
     setContent {
       BtMacroKbTheme {
-        Tmp4Screen()
+        Tmp6Screen()
       }
     }
   }
