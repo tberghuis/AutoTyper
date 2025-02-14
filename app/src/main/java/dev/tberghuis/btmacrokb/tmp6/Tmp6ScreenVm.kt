@@ -3,12 +3,16 @@ package dev.tberghuis.btmacrokb.tmp6
 import android.app.Application
 import android.net.Uri
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.viewModelScope
 import dev.tberghuis.btmacrokb.util.logd
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.launch
 
 class Tmp6ScreenVm(
   private val application: Application,
 ) : AndroidViewModel(application) {
 
+  val controller = SingleUseBtController2(application)
 
   // call from rememberSaveable to only run once
   fun processDataUri(data: Uri) {
@@ -17,6 +21,8 @@ class Tmp6ScreenVm(
     val payloadString = data.getQueryParameter("payload") ?: return
 
     logd("deviceString $deviceString payloadString $payloadString")
+    viewModelScope.launch(IO) {
+      controller.sendPayload(deviceString, payloadString)
+    }
   }
-
 }
