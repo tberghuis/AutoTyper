@@ -23,6 +23,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
+import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -37,7 +38,6 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun SettingsScreen() {
   val nav = LocalNavController.current
-
 
   Scaffold(
     modifier = Modifier,
@@ -81,9 +81,7 @@ fun SettingsScreenContent(modifier: Modifier) {
         val image = if (passwordVisible)
           Icons.Filled.Visibility
         else Icons.Filled.VisibilityOff
-
         val description = if (passwordVisible) "Hide password" else "Show password"
-
         IconButton(onClick = { passwordVisible = !passwordVisible }) {
           Icon(imageVector = image, description)
         }
@@ -92,5 +90,10 @@ fun SettingsScreenContent(modifier: Modifier) {
       keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
       singleLine = true,
     )
+    Button(onClick = {
+      // todo
+    }) {
+      Text("Save")
+    }
   }
 }
