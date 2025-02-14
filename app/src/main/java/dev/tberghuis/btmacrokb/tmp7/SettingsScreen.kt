@@ -36,8 +36,13 @@ fun SettingsScreen() {
       )
     },
   ) { padding ->
-    Column(modifier = Modifier.padding(padding)) {
+    SettingsScreenContent(Modifier.padding(padding))
+  }
+}
+
+@Composable
+fun SettingsScreenContent(modifier: Modifier) {
+    Column(modifier = modifier) {
       Text("hello settings")
     }
-  }
 }
