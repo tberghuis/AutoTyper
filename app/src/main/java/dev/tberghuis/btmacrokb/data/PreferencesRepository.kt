@@ -28,8 +28,15 @@ class PreferencesRepository(private val dataStore: DataStore<Preferences>) {
       settings[KEY_ENCRYPTION_PASSWORD] = s
     }
   }
-  
+
   companion object {
     private val KEY_ENCRYPTION_PASSWORD = stringPreferencesKey("encryption_password")
+
+    @Volatile
+    private var instance: PreferencesRepository? = null
+    fun getInstance(context: Context) =
+      instance ?: synchronized(this) {
+        instance ?: PreferencesRepository(context.dataStore).also { instance = it }
+      }
   }
 }
