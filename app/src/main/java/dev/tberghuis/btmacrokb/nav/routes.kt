@@ -15,6 +15,9 @@ sealed interface Route {
   @Serializable
   data object MacroList : Route
 
+  @Serializable
+  data object Settings : Route
+
   // use 0 to indicate new macro
   // or should I use separate route?? NewMacro nah
   @Serializable
