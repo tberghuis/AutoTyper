@@ -18,7 +18,12 @@ class Tmp6ScreenVm(
   fun processDataUri(data: Uri) {
     logd("processDataUri $data")
     val deviceString = data.getQueryParameter("device") ?: return
-    val payloadString = data.getQueryParameter("payload") ?: return
+    var payloadString = data.getQueryParameter("payload") ?: return
+
+    val encrypted = data.queryParameterNames.contains("encrypted")
+    if (encrypted) {
+      payloadString = SimpleAES.decrypt(payloadString, "1234")
+    }
 
     logd("deviceString $deviceString payloadString $payloadString")
     viewModelScope.launch(IO) {
