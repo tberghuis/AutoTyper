@@ -71,7 +71,7 @@ fun SettingsScreenContent(modifier: Modifier) {
     OutlinedTextField(
       value = "random",
       onValueChange = {},
-      modifier = Modifier,
+      modifier = Modifier.padding(5.dp),
       label = { Text("Password") },
       trailingIcon = {
         val image = if (passwordVisible)
@@ -90,34 +90,3 @@ fun SettingsScreenContent(modifier: Modifier) {
     )
   }
 }
-
-
-@Composable
-fun PasswordTextFieldExample() {
-  var password by remember { mutableStateOf("") }
-  var passwordVisible by remember { mutableStateOf(false) }
-
-  Column(modifier = Modifier.padding(16.dp)) {
-    OutlinedTextField(
-      value = password,
-      onValueChange = { password = it },
-      label = { Text("Password") },
-      singleLine = true,
-      visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
-      keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-      trailingIcon = {
-        val image = if (passwordVisible)
-          Icons.Filled.Visibility
-        else Icons.Filled.VisibilityOff
-
-        val description = if (passwordVisible) "Hide password" else "Show password"
-
-        IconButton(onClick = { passwordVisible = !passwordVisible }) {
-          Icon(imageVector = image, description)
-        }
-      },
-      modifier = Modifier.padding(8.dp)
-    )
-  }
-}
-
