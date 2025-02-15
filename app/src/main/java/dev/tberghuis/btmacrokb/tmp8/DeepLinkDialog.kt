@@ -11,6 +11,7 @@ import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -116,7 +117,9 @@ fun DeepLinkDialog(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PairedDeviceDropdown() {
+fun PairedDeviceDropdown(
+  vm: Tmp8Vm = viewModel()
+) {
   var expanded by remember { mutableStateOf(false) }
 
   ExposedDropdownMenuBox(
@@ -124,7 +127,18 @@ fun PairedDeviceDropdown() {
     onExpandedChange = { expanded = !expanded },
     modifier = Modifier,
   ) {
-
+    TextField(
+      value = deviceDisplayText(vm.deepLinkVmc.selectedDeviceIndex),
+      onValueChange = {},
+      readOnly = true,
+    )
   }
 }
 
+fun deviceDisplayText(index: Int?): String {
+  return if (index == null) {
+    "choose device"
+  } else {
+    "index $index"
+  }
+}

@@ -1,6 +1,7 @@
 package dev.tberghuis.btmacrokb.tmp8
 
 import android.app.Application
+import android.bluetooth.BluetoothDevice
 import android.net.Uri
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -10,6 +11,7 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import dev.tberghuis.btmacrokb.data.PreferencesRepository
+import dev.tberghuis.btmacrokb.service.provideMyBtService
 import dev.tberghuis.btmacrokb.tmp6.SimpleAES
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.first
@@ -27,6 +29,15 @@ class DeepLinkVmc(application: Application, private val scope: CoroutineScope) {
 
   var showDialog by mutableStateOf(false)
   var encryptedChecked by mutableStateOf(false)
+
+  val pairedDevices = mutableStateOf<List<BluetoothDevice>>(listOf())
+  var selectedDeviceIndex by mutableStateOf<Int?>(null)
+
+  init {
+    scope.launch {
+      pairedDevices.value = application.provideMyBtService().myBtController.getPairedDevices()
+    }
+  }
 
   fun deepLinkToClipboard(
     clipboardManager: ClipboardManager,
