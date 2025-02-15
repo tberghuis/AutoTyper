@@ -5,6 +5,7 @@ import android.net.Uri
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import dev.tberghuis.btmacrokb.data.PreferencesRepository
+import dev.tberghuis.btmacrokb.data.appDatabase
 import dev.tberghuis.btmacrokb.util.logd
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.flow.first
@@ -20,22 +21,27 @@ class Tmp6ScreenVm(
   // call from rememberSaveable to only run once
   fun processDataUri(data: Uri) {
     logd("processDataUri $data")
-    val deviceString = data.getQueryParameter("device") ?: return
-    var payloadString = data.getQueryParameter("payload") ?: return
 
-    val encrypted = data.queryParameterNames.contains("encrypted")
-
+    // todo display errors
+    // early returns
 
     viewModelScope.launch(IO) {
 
-      if (encrypted) {
-        val password = prefs.encryptionPasswordFlow.first()
-        // todo try catch wrong password
-        payloadString = SimpleAES.decrypt(payloadString, password)
-      }
+      val address = data.getQueryParameter("device") ?: return@launch
+      val payload = data.getQueryParameter("payload") ?: run {
+        val macroId = data.getQueryParameter("macro_id")?.toLong() ?: return@launch
+        application.appDatabase.macroDao().getById(macroId)?.payload
+      } ?: return@launch
 
-      logd("deviceString $deviceString payloadString $payloadString")
-      controller.sendPayload(deviceString, payloadString)
+//    val encrypted = data.queryParameterNames.contains("encrypted")
+//      if (encrypted) {
+//        val password = prefs.encryptionPasswordFlow.first()
+//        // todo try catch wrong password
+//        payloadString = SimpleAES.decrypt(payloadString, password)
+//      }
+
+      logd("address $address payload $payload")
+      controller.sendPayload(address, payload)
     }
   }
 }

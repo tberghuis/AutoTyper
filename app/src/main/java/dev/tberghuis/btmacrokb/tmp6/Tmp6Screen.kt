@@ -23,21 +23,7 @@ fun Tmp6Screen(
     ""
   }
 
-
-
   Column {
     Text("hello tmp6")
-
-
-    Button(onClick = {
-      logd("encrypt hello")
-      val encrypted = SimpleAES.encrypt("hello\n", "1234")
-      logd("encrypted $encrypted")
-      val decrypted = SimpleAES.decrypt(encrypted, "1234")
-      logd("decrypted $decrypted")
-    }) {
-      Text("encrypt hello")
-    }
-
   }
 }
