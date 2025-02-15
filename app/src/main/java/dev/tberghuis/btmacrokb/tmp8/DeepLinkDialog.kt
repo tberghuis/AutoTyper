@@ -95,7 +95,7 @@ fun DeepLinkDialog(
           modifier = Modifier.align(Alignment.End),
         ) {
           TextButton(
-            onClick = { },
+            onClick = { onDismissRequest() },
             modifier = Modifier
           ) {
             Text("Cancel")
