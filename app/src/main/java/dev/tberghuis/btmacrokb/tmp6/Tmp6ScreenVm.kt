@@ -4,13 +4,16 @@ import android.app.Application
 import android.net.Uri
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import dev.tberghuis.btmacrokb.data.PreferencesRepository
 import dev.tberghuis.btmacrokb.util.logd
 import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 class Tmp6ScreenVm(
   private val application: Application,
 ) : AndroidViewModel(application) {
+  private val prefs = PreferencesRepository.getInstance(application)
 
   val controller = SingleUseBtController2(application)
 
@@ -21,15 +24,16 @@ class Tmp6ScreenVm(
     var payloadString = data.getQueryParameter("payload") ?: return
 
     val encrypted = data.queryParameterNames.contains("encrypted")
-    if (encrypted) {
-      // todo get password datastore
-//      if no password return
-//      test wrong password
-      payloadString = SimpleAES.decrypt(payloadString, "1234")
-    }
 
-    logd("deviceString $deviceString payloadString $payloadString")
+
     viewModelScope.launch(IO) {
+
+      if (encrypted) {
+        val password = prefs.encryptionPasswordFlow.first()
+        payloadString = SimpleAES.decrypt(payloadString, password)
+      }
+
+      logd("deviceString $deviceString payloadString $payloadString")
       controller.sendPayload(deviceString, payloadString)
     }
   }

@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 class SettingsScreenVm(
   private val application: Application,
 ) : AndroidViewModel(application) {
-  val prefs = PreferencesRepository.getInstance(application)
+  private val prefs = PreferencesRepository.getInstance(application)
 
   var password by mutableStateOf("")
 
