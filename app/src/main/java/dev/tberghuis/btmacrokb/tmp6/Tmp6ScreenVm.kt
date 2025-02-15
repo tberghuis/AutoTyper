@@ -8,10 +8,9 @@ import dev.tberghuis.btmacrokb.data.PreferencesRepository
 import dev.tberghuis.btmacrokb.data.appDatabase
 import dev.tberghuis.btmacrokb.util.logd
 import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
-class Tmp6ScreenVm(
+class DeepLinkScreenVm(
   private val application: Application,
 ) : AndroidViewModel(application) {
   private val prefs = PreferencesRepository.getInstance(application)

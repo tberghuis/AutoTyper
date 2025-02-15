@@ -9,7 +9,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
 fun DeepLinkScreen(
-  vm: Tmp6ScreenVm = viewModel()
+  vm: DeepLinkScreenVm = viewModel()
 ) {
   val activity = LocalActivity.current
 
