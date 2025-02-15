@@ -36,7 +36,9 @@ fun Tmp6Screen(
     }
   }
   if (vm.deepLinkVmc.showDialog) {
-    DeepLinkDialog({})
+    DeepLinkDialog(onDismissRequest = {
+      vm.deepLinkVmc.showDialog = false
+    })
   }
 }
 
