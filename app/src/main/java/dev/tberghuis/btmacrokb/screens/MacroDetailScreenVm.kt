@@ -13,6 +13,7 @@ import dev.tberghuis.btmacrokb.data.Macro
 import dev.tberghuis.btmacrokb.data.appDatabase
 import dev.tberghuis.btmacrokb.util.logd
 import dev.tberghuis.btmacrokb.nav.Route
+import dev.tberghuis.btmacrokb.tmp8.DeepLinkVmc
 import dev.tberghuis.btmacrokb.usecase.sendPayload
 import kotlinx.coroutines.launch
 
@@ -24,6 +25,8 @@ class MacroDetailScreenVm(
 
   var title by mutableStateOf("")
   var payload by mutableStateOf("")
+
+  val deepLinkVmc = DeepLinkVmc(application, viewModelScope)
 
   init {
     logd("MacroDetailScreenVm init macroDetail $macroDetail")

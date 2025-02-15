@@ -17,11 +17,11 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
-class Tmp8Vm(
-  private val application: Application,
-) : AndroidViewModel(application) {
-  val deepLinkVmc = DeepLinkVmc(application, viewModelScope)
-}
+//class Tmp8Vm(
+//  private val application: Application,
+//) : AndroidViewModel(application) {
+//  val deepLinkVmc = DeepLinkVmc(application, viewModelScope)
+//}
 
 
 class DeepLinkVmc(application: Application, private val scope: CoroutineScope) {

@@ -18,6 +18,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Link
 import androidx.compose.material.icons.filled.Save
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -33,6 +34,7 @@ import androidx.compose.ui.unit.dp
 import dev.tberghuis.btmacrokb.composables.BottomBar
 import dev.tberghuis.btmacrokb.composables.LocalNavController
 import dev.tberghuis.btmacrokb.nav.LocalSnackbarHostState
+import dev.tberghuis.btmacrokb.tmp8.DeepLinkDialog
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -71,6 +73,15 @@ fun MacroDetailScreen(
   ) { padding ->
     MacroDetailScreenContent(padding)
   }
+
+
+  if (vm.deepLinkVmc.showDialog) {
+    DeepLinkDialog(onDismissRequest = {
+      vm.deepLinkVmc.showDialog = false
+    })
+  }
+
+
 }
 
 @Composable
@@ -117,6 +128,9 @@ fun MacroDetailScreenContent(
     Row(
       horizontalArrangement = Arrangement.spacedBy(10.dp),
     ) {
+      Button(onClick = { vm.deepLinkVmc.showDialog = true }) {
+        Icon(Icons.Filled.Link, "link")
+      }
       Button(onClick = { vm.save(snackbarHostState) }) {
         Icon(Icons.Filled.Save, "save")
       }

@@ -28,10 +28,11 @@ import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import dev.tberghuis.btmacrokb.screens.MacroDetailScreenVm
 
 @Composable
 fun Tmp6Screen(
-  vm: Tmp8Vm = viewModel()
+  vm: MacroDetailScreenVm = viewModel()
 ) {
   Column {
     Text("hello tmp 6")
@@ -56,7 +57,7 @@ fun Tmp6ScreenPreview() {
 @Composable
 fun DeepLinkDialog(
   onDismissRequest: () -> Unit,
-  vm: Tmp8Vm = viewModel()
+  vm: MacroDetailScreenVm = viewModel()
 ) {
   val clipboardManager = LocalClipboardManager.current
 
@@ -104,7 +105,7 @@ fun DeepLinkDialog(
             onClick = {
               vm.deepLinkVmc.deepLinkToClipboard(
                 clipboardManager = clipboardManager,
-                payload = "hello\n",
+                payload = vm.payload,
                 encrypted = vm.deepLinkVmc.encryptedChecked
               )
               onDismissRequest()
@@ -122,7 +123,7 @@ fun DeepLinkDialog(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PairedDeviceDropdown(
-  vm: Tmp8Vm = viewModel()
+  vm: MacroDetailScreenVm = viewModel()
 ) {
   var expanded by remember { mutableStateOf(false) }
 
