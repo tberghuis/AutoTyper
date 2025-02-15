@@ -30,6 +30,7 @@ class Tmp6ScreenVm(
 
       if (encrypted) {
         val password = prefs.encryptionPasswordFlow.first()
+        // todo try catch wrong password
         payloadString = SimpleAES.decrypt(payloadString, password)
       }
 
