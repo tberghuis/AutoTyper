@@ -79,8 +79,10 @@ fun SettingsScreenContent(
     Spacer(Modifier.height(50.dp))
     Text("Password for encrypted deep links:")
     OutlinedTextField(
-      value = "random",
-      onValueChange = {},
+      value = vm.password,
+      onValueChange = {
+        vm.password = it
+      },
       modifier = Modifier.padding(5.dp),
       label = { Text("Password") },
       trailingIcon = {
