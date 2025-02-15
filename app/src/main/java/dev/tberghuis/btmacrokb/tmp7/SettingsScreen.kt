@@ -33,10 +33,13 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SettingsScreen() {
+fun SettingsScreen(
+  vm: SettingsScreenVm = viewModel()
+) {
   val nav = LocalNavController.current
 
   Scaffold(
@@ -60,7 +63,10 @@ fun SettingsScreen() {
 }
 
 @Composable
-fun SettingsScreenContent(modifier: Modifier) {
+fun SettingsScreenContent(
+  modifier: Modifier,
+  vm: SettingsScreenVm = viewModel()
+) {
   var passwordVisible by remember { mutableStateOf(false) }
 
   Column(
@@ -91,7 +97,7 @@ fun SettingsScreenContent(modifier: Modifier) {
       singleLine = true,
     )
     Button(onClick = {
-      // todo
+      vm.save()
     }) {
       Text("Save")
     }
