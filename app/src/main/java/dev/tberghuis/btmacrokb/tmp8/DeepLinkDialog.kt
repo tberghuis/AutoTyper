@@ -103,7 +103,6 @@ fun DeepLinkDialog(
           }
           TextButton(
             onClick = {
-              // todo if no macroId, snackbar, please save
               val macroId = vm.getMacroId() ?: return@TextButton
               vm.deepLinkVmc.deepLinkToClipboard(
                 clipboardManager = clipboardManager,

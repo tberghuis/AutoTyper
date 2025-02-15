@@ -128,7 +128,11 @@ fun MacroDetailScreenContent(
     Row(
       horizontalArrangement = Arrangement.spacedBy(10.dp),
     ) {
-      Button(onClick = { vm.deepLinkVmc.showDialog = true }) {
+      Button(onClick = {
+        // todo if no macroId, snackbar, please save
+        vm.getMacroId() ?: return@Button
+        vm.deepLinkVmc.showDialog = true
+      }) {
         Icon(Icons.Filled.Link, "link")
       }
       Button(onClick = { vm.save(snackbarHostState) }) {
