@@ -34,7 +34,7 @@ fun DeepLinkScreen(
     ) {
       Column {
         Text("deeplink: ")
-        Text("address: ")
+        Text("device: ")
         Text("payload: ")
         Text("result: ")
       }
