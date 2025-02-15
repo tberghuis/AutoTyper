@@ -33,6 +33,16 @@ class MacroDetailScreenVm(
     loadData()
   }
 
+  fun getMacroId(): Long? {
+    if (macroDetail.id != 0L) {
+      return macroDetail.id
+    }
+    if (newMacroId != 0L) {
+      return newMacroId
+    }
+    return null
+  }
+
   private fun loadData() {
     viewModelScope.launch {
       application.appDatabase.macroDao().getById(macroDetail.id)?.let {

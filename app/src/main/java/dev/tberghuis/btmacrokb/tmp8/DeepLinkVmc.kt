@@ -28,7 +28,7 @@ class DeepLinkVmc(application: Application, private val scope: CoroutineScope) {
   private val prefs = PreferencesRepository.getInstance(application)
 
   var showDialog by mutableStateOf(false)
-  var encryptedChecked by mutableStateOf(false)
+//  var encryptedChecked by mutableStateOf(false)
 
   val pairedDevices = mutableStateOf<List<BluetoothDevice>>(listOf())
 
@@ -43,27 +43,26 @@ class DeepLinkVmc(application: Application, private val scope: CoroutineScope) {
 
   fun deepLinkToClipboard(
     clipboardManager: ClipboardManager,
-    payload: String,
-    encrypted: Boolean
+    macroId: Long,
   ) {
     // todo if selectedDevice null, snackbar or error dialog
     if (selectedDevice == null) {
       return
     }
-
     scope.launch {
       val deepLinkUri = Uri.Builder().apply {
         scheme("autotyper")
         authority("autotyper")
         appendQueryParameter("device", selectedDevice?.address)
-        if (encrypted) {
-          appendQueryParameter("encrypted", "1")
-          SimpleAES.encrypt(payload, prefs.encryptionPasswordFlow.first())
-        } else {
-          payload
-        }.let {
-          appendQueryParameter("payload", it)
-        }
+        appendQueryParameter("macro_id", macroId.toString())
+//        if (encrypted) {
+//          appendQueryParameter("encrypted", "1")
+//          SimpleAES.encrypt(payload, prefs.encryptionPasswordFlow.first())
+//        } else {
+//          payload
+//        }.let {
+//          appendQueryParameter("payload", it)
+//        }
         build()
       }.toString()
       clipboardManager.setText(AnnotatedString(deepLinkUri))

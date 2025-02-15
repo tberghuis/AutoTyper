@@ -76,17 +76,17 @@ fun DeepLinkDialog(
 
 
 
-        Row(
-          verticalAlignment = Alignment.CenterVertically,
-        ) {
-          Text(
-            "Encrypted"
-          )
-          Checkbox(
-            checked = vm.deepLinkVmc.encryptedChecked,
-            onCheckedChange = { vm.deepLinkVmc.encryptedChecked = it }
-          )
-        }
+//        Row(
+//          verticalAlignment = Alignment.CenterVertically,
+//        ) {
+//          Text(
+//            "Encrypted"
+//          )
+//          Checkbox(
+//            checked = vm.deepLinkVmc.encryptedChecked,
+//            onCheckedChange = { vm.deepLinkVmc.encryptedChecked = it }
+//          )
+//        }
 
 
         PairedDeviceDropdown()
@@ -103,10 +103,11 @@ fun DeepLinkDialog(
           }
           TextButton(
             onClick = {
+              // todo if no macroId, snackbar, please save
+              val macroId = vm.getMacroId() ?: return@TextButton
               vm.deepLinkVmc.deepLinkToClipboard(
                 clipboardManager = clipboardManager,
-                payload = vm.payload,
-                encrypted = vm.deepLinkVmc.encryptedChecked
+                macroId = macroId,
               )
               onDismissRequest()
             },
