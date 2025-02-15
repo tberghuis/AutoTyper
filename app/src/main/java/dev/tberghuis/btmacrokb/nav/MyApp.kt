@@ -46,9 +46,6 @@ fun MyApp() {
             MacroDetailScreen()
           }
         }
-        composable<Route.Settings> { entry ->
-          SettingsScreen()
-        }
       }
     }
   }
