@@ -2,15 +2,13 @@ package dev.tberghuis.btmacrokb.tmp6
 
 import androidx.activity.compose.LocalActivity
 import androidx.compose.foundation.layout.Column
-import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.lifecycle.viewmodel.compose.viewModel
-import dev.tberghuis.btmacrokb.util.logd
 
 @Composable
-fun Tmp6Screen(
+fun DeepLinkScreen(
   vm: Tmp6ScreenVm = viewModel()
 ) {
   val activity = LocalActivity.current

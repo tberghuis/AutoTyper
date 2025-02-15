@@ -69,7 +69,7 @@
 
 
         <activity
-                android:name=".tmp4.TmpActivity"
+                android:name=".tmp4.DeepLinkActivity"
                 android:exported="true"
                 android:theme="@style/Theme.BtMacroKb"
                 android:windowSoftInputMode="adjustResize">
