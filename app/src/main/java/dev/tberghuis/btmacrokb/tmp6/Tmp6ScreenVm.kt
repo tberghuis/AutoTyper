@@ -1,14 +1,15 @@
 package dev.tberghuis.btmacrokb.tmp6
 
 import android.app.Application
+import android.content.Intent
 import android.net.Uri
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import dev.tberghuis.btmacrokb.data.PreferencesRepository
 import dev.tberghuis.btmacrokb.data.appDatabase
+import dev.tberghuis.btmacrokb.service.MyBtService
 import dev.tberghuis.btmacrokb.util.logd
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
@@ -25,6 +26,10 @@ class DeepLinkScreenVm(
 
   // call from rememberSaveable to only run once
   fun processDataUri(data: Uri) {
+    // kill running service because can't hid.registerApp() twice
+    val intent = Intent(application, MyBtService::class.java)
+    application.stopService(intent)
+
     logd("processDataUri $data")
     uiDeeplink = data.toString()
     viewModelScope.launch(IO) {
