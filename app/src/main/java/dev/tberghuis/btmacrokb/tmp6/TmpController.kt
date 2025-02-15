@@ -15,8 +15,6 @@ import dev.tberghuis.btmacrokb.kbDescriptor
 import dev.tberghuis.btmacrokb.util.logd
 import kotlin.coroutines.coroutineContext
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -34,12 +32,6 @@ class SingleUseBtController2(
   private val isRegisteredForHid = MutableStateFlow(false)
   private val hidDeviceCallback = initHidDeviceCallback()
 
-  init {
-//    MainScope().launch(IO) {
-//      registerApp()
-//    }
-  }
-
   @SuppressLint("MissingPermission")
   private fun getDevice(address: String): BluetoothDevice? {
     return btAdapter.bondedDevices?.find {
@@ -47,7 +39,6 @@ class SingleUseBtController2(
     }
   }
 
-  // todo testing with missing permission
   @SuppressLint("MissingPermission")
   private fun registerApp(hid: BluetoothHidDevice) {
     logd("registerApp")
