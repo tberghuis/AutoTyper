@@ -1,6 +1,7 @@
 package dev.tberghuis.btmacrokb.tmp8
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -28,6 +29,7 @@ fun Tmp6Screen(
   Column {
     Text("hello tmp 6")
   }
+  DeepLinkDialog({})
 }
 
 @Preview
@@ -36,50 +38,37 @@ fun Tmp6ScreenPreview() {
   Tmp6Screen()
 }
 
-
-@Composable
-fun DeepLinkDialog() {
-//  BasicAlertDialog()
-}
-
-
-@Preview
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun BasicAlertDialogSample() {
-  val openDialog = remember { mutableStateOf(true) }
+fun DeepLinkDialog(onDismissRequest: () -> Unit) {
+  BasicAlertDialog(
+    onDismissRequest = onDismissRequest,
+    modifier = Modifier,
+  ) {
+    Surface() {
 
-  if (openDialog.value) {
-    BasicAlertDialog(
-      onDismissRequest = {
-        openDialog.value = false
-      }
-    ) {
-      Surface(
-        modifier = Modifier
-          .wrapContentWidth()
-          .wrapContentHeight(),
-        shape = MaterialTheme.shapes.large,
-        tonalElevation = AlertDialogDefaults.TonalElevation
-      ) {
-        Column(modifier = Modifier.padding(16.dp)) {
-          Text(
-            text =
-            "This area typically contains the supportive text " +
-                "which presents the details regarding the Dialog's purpose.",
-          )
-          Spacer(modifier = Modifier.height(24.dp))
+      Column(modifier = Modifier.padding(16.dp)) {
+        Text("Deep Link")
+        Text(
+          text = "Click OK to copy link to clipboard.",
+        )
+        Row(
+          modifier = Modifier.align(Alignment.End),
+        ) {
           TextButton(
-            onClick = { openDialog.value = false },
-            modifier = Modifier.align(Alignment.End)
+            onClick = { },
+            modifier = Modifier
           ) {
-            Text("Confirm")
+            Text("Cancel")
+          }
+          TextButton(
+            onClick = { },
+            modifier = Modifier
+          ) {
+            Text("OK")
           }
         }
       }
     }
   }
 }
-
-
-
