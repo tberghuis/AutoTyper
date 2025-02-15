@@ -8,6 +8,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
+import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -131,6 +132,7 @@ fun PairedDeviceDropdown(
       value = deviceDisplayText(vm.deepLinkVmc.selectedDeviceIndex),
       onValueChange = {},
       readOnly = true,
+      trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
     )
   }
 }
