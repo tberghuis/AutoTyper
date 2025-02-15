@@ -39,6 +39,7 @@ class DeepLinkVmc(application: Application, private val scope: CoroutineScope) {
         authority("autotyper")
         appendQueryParameter("device", address)
         if (encrypted) {
+          appendQueryParameter("encrypted", "1")
           SimpleAES.encrypt(payload, prefs.encryptionPasswordFlow.first())
         } else {
           payload
