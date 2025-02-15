@@ -33,14 +33,20 @@ class DeepLinkScreenVm(
         val macroId = data.getQueryParameter("macro_id")?.toLong() ?: return@run null
         application.appDatabase.macroDao().getById(macroId)?.payload
       }
-      if(address==null || payload == null){
+      if (address == null || payload == null) {
         uiResult = "error"
         return@launch
       }
       uiDevice = address
       uiPayload = payload
-      controller.sendPayload(address, payload)
-      uiResult = "sent"
+
+      try {
+        // future.txt sendPayload() return a result
+        controller.sendPayload(address, payload)
+        uiResult = "sent"
+      } catch (e: Exception) {
+        uiResult = "error"
+      }
     }
   }
 }

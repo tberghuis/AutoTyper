@@ -33,10 +33,10 @@ fun DeepLinkScreen(
       horizontalAlignment = Alignment.CenterHorizontally,
     ) {
       Column {
-        Text("deeplink: ")
-        Text("device: ")
-        Text("payload: ")
-        Text("result: ")
+        Text("deeplink: ${vm.uiDeeplink}")
+        Text("device:  ${vm.uiDevice}")
+        Text("payload:  ${vm.uiPayload}")
+        Text("result:  ${vm.uiResult}")
       }
     }
   }
