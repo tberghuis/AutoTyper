@@ -19,7 +19,12 @@ class DeepLinkVmc(application: Application) {
   var showDialog by mutableStateOf(false)
 
 
-  fun deepLinkToClipboard(clipboardManager: ClipboardManager) {
+  fun deepLinkToClipboard(
+    clipboardManager: ClipboardManager,
+    address: String,
+    payload: String,
+    encrypted: Boolean
+  ) {
     clipboardManager.setText(AnnotatedString("hello world"))
   }
 

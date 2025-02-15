@@ -79,7 +79,13 @@ fun DeepLinkDialog(
           }
           TextButton(
             onClick = {
-              vm.deepLinkVmc.deepLinkToClipboard(clipboardManager)
+              vm.deepLinkVmc.deepLinkToClipboard(
+                clipboardManager = clipboardManager,
+                address = "28:7F:CF:BD:00:B9",
+                payload = "hello\n",
+                encrypted = false
+              )
+              onDismissRequest()
             },
             modifier = Modifier
           ) {
