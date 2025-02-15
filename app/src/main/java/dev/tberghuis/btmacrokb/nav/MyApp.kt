@@ -14,7 +14,6 @@ import dev.tberghuis.btmacrokb.screens.MacroListScreen
 import dev.tberghuis.btmacrokb.composables.LocalNavController
 import dev.tberghuis.btmacrokb.screens.PermissionScreen
 import dev.tberghuis.btmacrokb.screens.MacroDetailScreen
-import dev.tberghuis.btmacrokb.tmp7.SettingsScreen
 
 val LocalSnackbarHostState = compositionLocalOf<SnackbarHostState> {
   error("CompositionLocal LocalSnackbarHostState not present")
