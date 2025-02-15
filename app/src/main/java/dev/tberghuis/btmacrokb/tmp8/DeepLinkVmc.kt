@@ -43,15 +43,19 @@ class DeepLinkVmc(application: Application, private val scope: CoroutineScope) {
 
   fun deepLinkToClipboard(
     clipboardManager: ClipboardManager,
-    address: String,
     payload: String,
     encrypted: Boolean
   ) {
+    // todo if selectedDevice null, snackbar or error dialog
+    if (selectedDevice == null) {
+      return
+    }
+
     scope.launch {
       val deepLinkUri = Uri.Builder().apply {
         scheme("autotyper")
         authority("autotyper")
-        appendQueryParameter("device", address)
+        appendQueryParameter("device", selectedDevice?.address)
         if (encrypted) {
           appendQueryParameter("encrypted", "1")
           SimpleAES.encrypt(payload, prefs.encryptionPasswordFlow.first())
