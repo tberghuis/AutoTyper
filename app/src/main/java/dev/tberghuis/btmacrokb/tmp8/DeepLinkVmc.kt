@@ -26,6 +26,7 @@ class DeepLinkVmc(application: Application, private val scope: CoroutineScope) {
   private val prefs = PreferencesRepository.getInstance(application)
 
   var showDialog by mutableStateOf(false)
+  var encryptedChecked by mutableStateOf(false)
 
   fun deepLinkToClipboard(
     clipboardManager: ClipboardManager,

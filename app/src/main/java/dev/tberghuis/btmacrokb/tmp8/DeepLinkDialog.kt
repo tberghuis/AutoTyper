@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.BasicAlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -59,6 +60,26 @@ fun DeepLinkDialog(
         Text(
           text = "Click OK to copy link to clipboard.",
         )
+
+
+
+
+        Row(
+          verticalAlignment = Alignment.CenterVertically,
+        ) {
+          Text(
+            "Encrypted"
+          )
+          Checkbox(
+            checked = vm.deepLinkVmc.encryptedChecked,
+            onCheckedChange = { vm.deepLinkVmc.encryptedChecked = it }
+          )
+        }
+
+
+
+
+
         Row(
           modifier = Modifier.align(Alignment.End),
         ) {
