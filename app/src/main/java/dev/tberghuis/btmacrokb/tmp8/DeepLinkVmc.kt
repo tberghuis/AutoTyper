@@ -31,6 +31,7 @@ class DeepLinkVmc(application: Application, private val scope: CoroutineScope) {
   var encryptedChecked by mutableStateOf(false)
 
   val pairedDevices = mutableStateOf<List<BluetoothDevice>>(listOf())
+
   //  var selectedDeviceIndex by mutableStateOf<Int?>(null)
   var selectedDevice by mutableStateOf<BluetoothDevice?>(null)
 
