@@ -1,4 +1,4 @@
-package dev.tberghuis.btmacrokb.tmp8
+package dev.tberghuis.btmacrokb.composables
 
 import android.annotation.SuppressLint
 import android.bluetooth.BluetoothDevice

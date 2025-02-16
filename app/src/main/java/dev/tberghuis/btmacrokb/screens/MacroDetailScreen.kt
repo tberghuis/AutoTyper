@@ -34,7 +34,7 @@ import androidx.compose.ui.unit.dp
 import dev.tberghuis.btmacrokb.composables.BottomBar
 import dev.tberghuis.btmacrokb.composables.LocalNavController
 import dev.tberghuis.btmacrokb.nav.LocalSnackbarHostState
-import dev.tberghuis.btmacrokb.tmp8.DeepLinkDialog
+import dev.tberghuis.btmacrokb.composables.DeepLinkDialog
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
