@@ -54,7 +54,6 @@ import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.rememberPermissionState
 import dev.tberghuis.btmacrokb.composables.BottomBar
 import dev.tberghuis.btmacrokb.nav.LocalSnackbarHostState
-import dev.tberghuis.btmacrokb.tmp7.AutoTyperTopBar
 import dev.tberghuis.btmacrokb.util.logd
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalPermissionsApi::class)
@@ -86,7 +85,11 @@ fun ConnectionScreen(
   Scaffold(
     modifier = Modifier.systemBarsPadding(),
     topBar = {
-      AutoTyperTopBar()
+      TopAppBar(
+        title = { Text("Auto Typer") },
+        modifier = Modifier,
+        actions = { },
+      )
     },
     bottomBar = {
       BottomBar()
