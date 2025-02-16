@@ -34,38 +34,17 @@ fun DeepLinkDialog(
   vm: MacroDetailScreenVm = viewModel()
 ) {
   val clipboardManager = LocalClipboardManager.current
-
   BasicAlertDialog(
     onDismissRequest = onDismissRequest,
     modifier = Modifier,
   ) {
     Surface() {
-
       Column(modifier = Modifier.padding(16.dp)) {
         Text("Deep Link")
         Text(
           text = "Click OK to copy link to clipboard.",
         )
-
-
-
-
-//        Row(
-//          verticalAlignment = Alignment.CenterVertically,
-//        ) {
-//          Text(
-//            "Encrypted"
-//          )
-//          Checkbox(
-//            checked = vm.deepLinkVmc.encryptedChecked,
-//            onCheckedChange = { vm.deepLinkVmc.encryptedChecked = it }
-//          )
-//        }
-
-
         PairedDeviceDropdown()
-
-
         Row(
           modifier = Modifier.align(Alignment.End),
         ) {
@@ -120,7 +99,6 @@ fun PairedDeviceDropdown(
       modifier = Modifier.exposedDropdownSize()
     ) {
       vm.deepLinkVmc.pairedDevices.value.forEach { bluetoothDevice ->
-
         DropdownMenuItem(
           text = { Text(deviceDisplayText(bluetoothDevice)) },
           onClick = {
@@ -128,22 +106,10 @@ fun PairedDeviceDropdown(
             expanded = false
           }
         )
-
-
       }
-
     }
-
   }
 }
-
-//fun deviceDisplayText(index: Int?): String {
-//  return if (index == null) {
-//    "choose device"
-//  } else {
-//    "index $index"
-//  }
-//}
 
 @SuppressLint("MissingPermission")
 fun deviceDisplayText(bluetoothDevice: BluetoothDevice?): String {
