@@ -1,4 +1,4 @@
-package dev.tberghuis.btmacrokb.tmp6
+package dev.tberghuis.btmacrokb.screens
 
 import android.app.Application
 import android.content.Intent
@@ -10,6 +10,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import dev.tberghuis.btmacrokb.data.appDatabase
 import dev.tberghuis.btmacrokb.service.MyBtService
+import dev.tberghuis.btmacrokb.tmp6.SingleUseBtController2
 import dev.tberghuis.btmacrokb.util.logd
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
