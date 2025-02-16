@@ -1,3 +1,6 @@
+v1.3.0    2025-02-16    dev-deeplink
+  feature - type script with deeplink
+
 v1.2.1    2024-11-06    main
   use vm oncleared to stop service instead of ACTION_ACTIVITY_DESTROY
     bug configuration change, service killed after screen rotate
