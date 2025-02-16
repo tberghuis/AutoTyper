@@ -10,7 +10,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import dev.tberghuis.btmacrokb.data.appDatabase
 import dev.tberghuis.btmacrokb.service.MyBtService
-import dev.tberghuis.btmacrokb.tmp6.SingleUseBtController2
+import dev.tberghuis.btmacrokb.tmp6.SingleUseBtController
 import dev.tberghuis.btmacrokb.util.logd
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 class DeepLinkScreenVm(
   private val application: Application,
 ) : AndroidViewModel(application) {
-  private val controller = SingleUseBtController2(application)
+  private val controller = SingleUseBtController(application)
 
   var uiDeeplink by mutableStateOf("")
   var uiDevice by mutableStateOf("")

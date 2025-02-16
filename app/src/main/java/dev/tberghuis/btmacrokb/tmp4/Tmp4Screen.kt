@@ -8,17 +8,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.platform.LocalContext
-import dev.tberghuis.btmacrokb.tmp6.SingleUseBtController2
+import dev.tberghuis.btmacrokb.tmp6.SingleUseBtController
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 
-var controller: SingleUseBtController2? = null
+var controller: SingleUseBtController? = null
 
 @Composable
 fun Tmp4Screen() {
   val context = LocalContext.current
   controller = remember {
-    SingleUseBtController2(context.applicationContext as Application)
+    SingleUseBtController(context.applicationContext as Application)
   }
 
   val scope = rememberCoroutineScope()

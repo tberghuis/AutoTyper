@@ -23,7 +23,7 @@ import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
-class SingleUseBtController2(
+class SingleUseBtController(
   private val application: Application
 ) {
   private val btAdapter = initAdapter()
