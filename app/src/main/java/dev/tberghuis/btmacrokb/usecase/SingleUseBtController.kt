@@ -1,4 +1,4 @@
-package dev.tberghuis.btmacrokb.tmp6
+package dev.tberghuis.btmacrokb.usecase
 
 import android.annotation.SuppressLint
 import android.app.Application

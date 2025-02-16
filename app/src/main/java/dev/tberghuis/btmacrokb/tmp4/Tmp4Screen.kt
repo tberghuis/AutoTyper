@@ -8,7 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.platform.LocalContext
-import dev.tberghuis.btmacrokb.tmp6.SingleUseBtController
+import dev.tberghuis.btmacrokb.usecase.SingleUseBtController
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 
