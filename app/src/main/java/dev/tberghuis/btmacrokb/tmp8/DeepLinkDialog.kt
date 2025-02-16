@@ -6,8 +6,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.BasicAlertDialog
-import androidx.compose.material3.Button
-import androidx.compose.material3.Checkbox
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
@@ -25,33 +23,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalClipboardManager
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import dev.tberghuis.btmacrokb.screens.MacroDetailScreenVm
-
-@Composable
-fun Tmp6Screen(
-  vm: MacroDetailScreenVm = viewModel()
-) {
-  Column {
-    Text("hello tmp 6")
-    Button(onClick = { vm.deepLinkVmc.showDialog = true }) {
-      Text("deep link")
-    }
-  }
-  if (vm.deepLinkVmc.showDialog) {
-    DeepLinkDialog(onDismissRequest = {
-      vm.deepLinkVmc.showDialog = false
-    })
-  }
-}
-
-@Preview
-@Composable
-fun Tmp6ScreenPreview() {
-  Tmp6Screen()
-}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
