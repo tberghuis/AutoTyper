@@ -1,4 +1,4 @@
-package dev.tberghuis.btmacrokb.tmp4
+package dev.tberghuis.btmacrokb
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
