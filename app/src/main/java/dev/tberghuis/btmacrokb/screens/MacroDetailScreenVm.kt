@@ -13,7 +13,7 @@ import dev.tberghuis.btmacrokb.data.Macro
 import dev.tberghuis.btmacrokb.data.appDatabase
 import dev.tberghuis.btmacrokb.util.logd
 import dev.tberghuis.btmacrokb.nav.Route
-import dev.tberghuis.btmacrokb.tmp8.DeepLinkVmc
+import dev.tberghuis.btmacrokb.vmc.DeepLinkVmc
 import dev.tberghuis.btmacrokb.usecase.sendPayload
 import kotlinx.coroutines.launch
 

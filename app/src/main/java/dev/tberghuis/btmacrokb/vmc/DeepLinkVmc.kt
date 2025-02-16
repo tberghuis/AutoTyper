@@ -1,4 +1,4 @@
-package dev.tberghuis.btmacrokb.tmp8
+package dev.tberghuis.btmacrokb.vmc
 
 import android.app.Application
 import android.bluetooth.BluetoothDevice
