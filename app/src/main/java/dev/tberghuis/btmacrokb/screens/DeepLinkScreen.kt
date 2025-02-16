@@ -1,4 +1,4 @@
-package dev.tberghuis.btmacrokb.tmp6
+package dev.tberghuis.btmacrokb.screens
 
 import androidx.activity.compose.LocalActivity
 import androidx.compose.foundation.layout.Arrangement
@@ -12,6 +12,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
+import dev.tberghuis.btmacrokb.tmp6.DeepLinkScreenVm
 
 @Composable
 fun DeepLinkScreen(
